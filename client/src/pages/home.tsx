@@ -65,7 +65,7 @@ export default function Home() {
       {/* Services Section - More Organized Layout */}
       <section id="services" className="py-32 bg-secondary/20">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6 border-b border-border pb-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
             <div className="max-w-xl">
               <span className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-4 block">Our Expertise</span>
               <h2 className="text-4xl md:text-5xl font-serif">Structured for success.</h2>
