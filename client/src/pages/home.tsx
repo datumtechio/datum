@@ -27,18 +27,20 @@ export default function Home() {
       </div>
 
       {/* TOP BAR */}
-      <header className="absolute top-0 left-0 w-full p-8 md:p-12 z-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+      <header className="absolute top-0 left-0 w-full p-8 md:p-12 z-50 flex justify-between items-start">
         <div className="text-2xl font-serif font-bold tracking-tight">DatumTech.</div>
-        
-        {/* Services List - Top Right */}
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium tracking-wide text-muted-foreground uppercase">
+      </header>
+
+      {/* Services List - Top Center */}
+      <div className="absolute top-24 md:top-32 left-0 w-full z-40 flex justify-center pointer-events-none">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium tracking-wide text-muted-foreground uppercase pointer-events-auto">
           <span>Web Development</span>
           <span className="hidden md:inline text-border">•</span>
           <span>Digital Marketing</span>
           <span className="hidden md:inline text-border">•</span>
           <span>Brand Identity</span>
         </div>
-      </header>
+      </div>
 
       {/* LEFT: Socials (Vertical) */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 p-8 z-50 hidden md:flex flex-col gap-8 items-center">
