@@ -51,7 +51,7 @@ export default function Home() {
               <span className="text-muted-foreground italic">Design Led.</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed font-light border-l border-primary/20 pl-6">
-              DatumTech transforms complex data into elegant digital experiences. We bridge the gap between analytical marketing and minimalist design.
+              We build high-performance websites, execute precision digital marketing campaigns, and craft distinct brand identities that drive measurable growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="rounded-none text-base px-10 h-16 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 group">
