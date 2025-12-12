@@ -81,7 +81,7 @@ export default function Home() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="space-y-12"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-medium leading-[0.9] tracking-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight">
             Smart Solutions <br/>
             <span className="text-muted-foreground italic">for Every Brand.</span>
           </h1>
