@@ -82,8 +82,8 @@ export default function Home() {
           className="space-y-12"
         >
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-medium leading-[0.9] tracking-tight">
-            Data Driven. <br/>
-            <span className="text-muted-foreground italic">Design Led.</span>
+            Smart Solutions <br/>
+            <span className="text-muted-foreground italic">for Every Brand.</span>
           </h1>
           
           {/* Main CTA */}
