@@ -89,7 +89,7 @@ export default function Home() {
           {/* Main CTA */}
           <div className="flex justify-center">
              <Button size="lg" className="rounded-none text-lg px-12 h-20 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 group shadow-2xl shadow-primary/20">
-                Start Your Project <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                Build My Website <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
           </div>
         </motion.div>
