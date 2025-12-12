@@ -46,8 +46,9 @@
 
   --radius: 0.5rem;
   
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Outfit', sans-serif;
+  /* Modern Tech Aesthetic */
+  --font-sans: 'Geist', sans-serif;
+  --font-serif: 'Space Grotesk', sans-serif; /* Using Space Grotesk as the display font */
 }
 
 /* LIGHT MODE - Clean, High Contrast */
