@@ -157,26 +157,27 @@
       <main class="relative z-10 max-w-5xl px-6 text-center mt-[-2rem]">
         <div id="hero-content" class="space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
           <div class="hero-heading-container">
-            <!-- Animated Wave Background for Text -->
-            <svg class="wave-text-bg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-96" viewBox="0 0 1200 400" preserveAspectRatio="none">
+            <!-- Full Background Wave Animation -->
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none" style="opacity: 0.25; z-index: 0;">
               <defs>
                 <style>
-                  @keyframes wave-motion {
+                  @keyframes wave-flow {
                     0% { transform: translateX(0); }
-                    50% { transform: translateX(80px); }
+                    50% { transform: translateX(100px); }
                     100% { transform: translateX(0); }
                   }
-                  .wave-path {
+                  .wave-bg-path {
                     fill: none;
                     stroke: currentColor;
-                    stroke-width: 4;
-                    animation: wave-motion 8s ease-in-out infinite;
+                    stroke-width: 8;
+                    animation: wave-flow 10s ease-in-out infinite;
                   }
                 </style>
               </defs>
-              <path class="wave-path" d="M0,150 Q300,50 600,150 T1200,150" />
-              <path class="wave-path" d="M0,200 Q300,100 600,200 T1200,200" style="stroke-width: 3; opacity: 0.6; animation-delay: 0.2s;" />
-              <path class="wave-path" d="M0,250 Q300,150 600,250 T1200,250" style="stroke-width: 3; opacity: 0.4; animation-delay: 0.4s;" />
+              <path class="wave-bg-path" d="M0,200 Q300,50 600,200 T1200,200" />
+              <path class="wave-bg-path" d="M0,350 Q300,200 600,350 T1200,350" style="stroke-width: 6; opacity: 0.8; animation-delay: 0.3s;" />
+              <path class="wave-bg-path" d="M0,500 Q300,350 600,500 T1200,500" style="stroke-width: 6; opacity: 0.6; animation-delay: 0.6s;" />
+              <path class="wave-bg-path" d="M0,650 Q300,500 600,650 T1200,650" style="stroke-width: 5; opacity: 0.4; animation-delay: 0.9s;" />
             </svg>
             
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20">
