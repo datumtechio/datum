@@ -158,28 +158,28 @@
         <div id="hero-content" class="space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
           <div class="hero-heading-container">
             <!-- Animated Wave Background for Text -->
-            <svg class="wave-text-bg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+            <svg class="wave-text-bg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-96" viewBox="0 0 1200 400" preserveAspectRatio="none">
               <defs>
                 <style>
                   @keyframes wave-motion {
                     0% { transform: translateX(0); }
-                    50% { transform: translateX(50px); }
+                    50% { transform: translateX(80px); }
                     100% { transform: translateX(0); }
                   }
                   .wave-path {
                     fill: none;
                     stroke: currentColor;
-                    stroke-width: 3;
+                    stroke-width: 4;
                     animation: wave-motion 8s ease-in-out infinite;
                   }
                 </style>
               </defs>
-              <path class="wave-path" d="M0,100 Q300,50 600,100 T1200,100" />
-              <path class="wave-path" d="M0,120 Q300,70 600,120 T1200,120" style="stroke-width: 2; opacity: 0.6; animation-delay: 0.2s;" />
-              <path class="wave-path" d="M0,140 Q300,90 600,140 T1200,140" style="stroke-width: 2; opacity: 0.4; animation-delay: 0.4s;" />
+              <path class="wave-path" d="M0,150 Q300,50 600,150 T1200,150" />
+              <path class="wave-path" d="M0,200 Q300,100 600,200 T1200,200" style="stroke-width: 3; opacity: 0.6; animation-delay: 0.2s;" />
+              <path class="wave-path" d="M0,250 Q300,150 600,250 T1200,250" style="stroke-width: 3; opacity: 0.4; animation-delay: 0.4s;" />
             </svg>
             
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20">
               Smart Solutions <br/>
               <span class="text-muted-foreground italic">for Every Brand.</span>
             </h1>
