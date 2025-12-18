@@ -58,18 +58,16 @@
     <div class="h-screen w-screen bg-background text-foreground overflow-hidden relative flex items-center justify-center selection:bg-primary selection:text-primary-foreground">
       
       <!-- Background -->
-      <div class="absolute inset-0 z-0 overflow-hidden">
-        <!-- Note: We use the direct path to the asset here. In a real build, Vite handles the import. 
-             For vanilla HTML in Vite, we can reference /src/... if we wanted, but let's stick to the generated path or import it in JS. 
-             Since we are moving to HTML, we'll use a hardcoded path or handle it via a small JS module.
-             Actually, to make Vite resolve the alias @assets in HTML, we might need a transform, but standard /attached_assets paths work if served statically. 
-             Let's use the relative path from the root which Vite serves. 
-        -->
-        <img 
-          src="/attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png" 
-          alt="Background" 
-          class="w-full h-full object-cover opacity-10 grayscale contrast-125 animate-wave"
-        />
+      <div class="absolute inset-0 z-0 overflow-hidden" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%);">
+        <!-- Wave background with animated effect -->
+        <div class="absolute inset-0 overflow-hidden">
+          <img 
+            id="wave-bg" 
+            alt="Background wave"
+            class="w-full h-full object-cover opacity-10 grayscale contrast-125 animate-wave"
+            style="will-change: transform;"
+          />
+        </div>
         <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
       </div>
 
@@ -158,6 +156,16 @@
         const yearSpan = document.getElementById('copyright');
         if(yearSpan) {
             yearSpan.textContent = `© ${new Date().getFullYear()} DatumTech`;
+        }
+
+        // Load wave background image
+        const waveBg = document.getElementById('wave-bg');
+        if(waveBg) {
+          waveBg.src = '/attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png';
+          waveBg.onerror = () => {
+            console.warn('Wave image failed to load from /attached_assets/, trying alternate path');
+            waveBg.src = '../../../attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png';
+          };
         }
 
         // Trigger Hero Animation
