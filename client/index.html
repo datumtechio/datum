@@ -4,25 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-    <title>DatumTech | Elegant Marketing Solutions</title>
-    <meta property="og:title" content="DatumTech | Elegant Marketing Solutions" />
-    <meta property="og:description" content="Premium digital marketing and web services for forward-thinking businesses. Simple, elegant, effective." />
+    <title>DatumTech | Smart Solutions</title>
+    <meta property="og:title" content="DatumTech | Smart Solutions" />
+    <meta property="og:description" content="Smart Solutions for Every Brand. Web Development, Digital Marketing, Brand Identity." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@replit" />
     <meta name="twitter:title" content="DatumTech" />
-    <meta name="twitter:description" content="Premium digital marketing and web services for forward-thinking businesses." />
+    <meta name="twitter:description" content="Smart Solutions for Every Brand." />
     <meta name="twitter:image" content="/og-image.png" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Importing Playfair Display (Serif) and DM Sans (Sans) -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Import Space Grotesk and other fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- Link to Tailwind CSS -->
+    <link rel="stylesheet" href="/src/index.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="h-screen w-screen bg-background text-foreground overflow-hidden relative flex items-center justify-center selection:bg-primary selection:text-primary-foreground">
+      
+      <!-- Background -->
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        <!-- Note: We use the direct path to the asset here. In a real build, Vite handles the import. 
+             For vanilla HTML in Vite, we can reference /src/... if we wanted, but let's stick to the generated path or import it in JS. 
+             Since we are moving to HTML, we'll use a hardcoded path or handle it via a small JS module.
+             Actually, to make Vite resolve the alias @assets in HTML, we might need a transform, but standard /attached_assets paths work if served statically. 
+             Let's use the relative path from the root which Vite serves. 
+        -->
+        <img 
+          src="/attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png" 
+          alt="Background" 
+          class="w-full h-full object-cover opacity-10 grayscale contrast-125 animate-wave"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+      </div>
+
+      <!-- TOP BAR -->
+      <header class="absolute top-0 left-0 w-full p-8 md:p-12 z-50 flex justify-between items-start">
+        <div class="text-2xl font-serif font-bold tracking-tight">DatumTech.</div>
+      </header>
+
+      <!-- Services List - Top Center -->
+      <div class="absolute top-24 md:top-32 left-0 w-full z-40 flex justify-center pointer-events-none">
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium tracking-wide text-muted-foreground uppercase pointer-events-auto">
+          <span>Web Development</span>
+          <span class="hidden md:inline text-border">•</span>
+          <span>Digital Marketing</span>
+          <span class="hidden md:inline text-border">•</span>
+          <span>Brand Identity</span>
+        </div>
+      </div>
+
+      <!-- LEFT: Socials (Vertical) -->
+      <div class="absolute left-0 top-1/2 -translate-y-1/2 p-8 z-50 hidden md:flex flex-col gap-8 items-center">
+        <div class="h-24 w-px bg-border"></div>
+        <a href="#" class="hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <!-- Linkedin Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <!-- X Icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <a href="mailto:hello@datumtech.com" class="hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <!-- Mail Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        <div class="h-24 w-px bg-border"></div>
+      </div>
+
+      <!-- BOTTOM BAR -->
+      <footer class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-50 flex flex-col md:flex-row justify-between items-end gap-8">
+        
+        <!-- Address -->
+        <div class="text-sm text-muted-foreground font-light flex flex-col gap-1">
+          <div class="flex items-center gap-2">
+            <span class="uppercase tracking-widest font-medium text-foreground">Beirut, Lebanon</span>
+          </div>
+          <span class="opacity-60" id="copyright">© 2025 DatumTech</span>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="flex flex-col items-start md:items-end gap-1">
+          <a href="mailto:hello@datumtech.com" class="text-lg font-medium hover:underline underline-offset-4">
+            hello@datumtech.com
+          </a>
+          <a href="tel:+9613000000" class="text-muted-foreground font-light hover:text-foreground transition-colors">
+            +961 3 000 000
+          </a>
+        </div>
+      </footer>
+
+      <!-- CENTER: Hero Content -->
+      <main class="relative z-10 max-w-5xl px-6 text-center mt-[-2rem]">
+        <div id="hero-content" class="space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight">
+            Smart Solutions <br/>
+            <span class="text-muted-foreground italic">for Every Brand.</span>
+          </h1>
+          
+          <!-- Main CTA -->
+          <div class="flex justify-center">
+             <button class="inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-none text-lg px-12 h-20 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 group shadow-2xl shadow-primary/20 cursor-pointer">
+                Build My Website 
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <!-- Vanilla JS for Animations & Dynamic Date -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Update Copyright Year
+        const yearSpan = document.getElementById('copyright');
+        if(yearSpan) {
+            yearSpan.textContent = `© ${new Date().getFullYear()} DatumTech`;
+        }
+
+        // Trigger Hero Animation
+        setTimeout(() => {
+          const hero = document.getElementById('hero-content');
+          if(hero) {
+            hero.classList.remove('opacity-0', 'scale-95');
+            hero.classList.add('opacity-100', 'scale-100');
+          }
+        }, 100);
+      });
+    </script>
   </body>
 </html>
