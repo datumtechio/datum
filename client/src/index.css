@@ -136,19 +136,19 @@
 
 @keyframes wave-shift {
   0% {
-    transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0) scale(1.08);
   }
   25% {
-    transform: translateX(2%) translateY(-1%);
+    transform: translateX(1%) translateY(-0.5%) scale(1.08);
   }
   50% {
-    transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0) scale(1.08);
   }
   75% {
-    transform: translateX(-2%) translateY(1%);
+    transform: translateX(-1%) translateY(0.5%) scale(1.08);
   }
   100% {
-    transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0) scale(1.08);
   }
 }
 
