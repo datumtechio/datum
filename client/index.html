@@ -24,28 +24,33 @@
     <!-- Link to Tailwind CSS -->
     <link rel="stylesheet" href="/src/index.css" />
     
-    <!-- Wave Animation Style -->
+    <!-- Wave Animation Style - High Priority -->
     <style>
       @keyframes wave-shift {
         0% {
-          transform: translateX(0) translateY(0) scale(1.08);
+          transform: translateX(0) translateY(0) scale(1.08) !important;
         }
         25% {
-          transform: translateX(1%) translateY(-0.5%) scale(1.08);
+          transform: translateX(1%) translateY(-0.5%) scale(1.08) !important;
         }
         50% {
-          transform: translateX(0) translateY(0) scale(1.08);
+          transform: translateX(0) translateY(0) scale(1.08) !important;
         }
         75% {
-          transform: translateX(-1%) translateY(0.5%) scale(1.08);
+          transform: translateX(-1%) translateY(0.5%) scale(1.08) !important;
         }
         100% {
-          transform: translateX(0) translateY(0) scale(1.08);
+          transform: translateX(0) translateY(0) scale(1.08) !important;
         }
       }
       
       .animate-wave {
-        animation: wave-shift 8s ease-in-out infinite;
+        animation: wave-shift 8s ease-in-out infinite !important;
+      }
+      
+      img.animate-wave {
+        animation: wave-shift 8s ease-in-out infinite !important;
+        will-change: transform;
       }
     </style>
   </head>
