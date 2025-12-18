@@ -52,6 +52,30 @@
         animation: wave-shift 8s ease-in-out infinite !important;
         will-change: transform;
       }
+      
+      @keyframes wave-text {
+        0%, 100% {
+          d: path('M0,64 Q16,32 32,64 T64,64');
+          opacity: 0.3;
+        }
+        50% {
+          d: path('M0,48 Q16,16 32,48 T64,48');
+          opacity: 0.5;
+        }
+      }
+      
+      .wave-text-bg {
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        opacity: 0.15;
+        z-index: -1;
+        animation: wave-text 6s ease-in-out infinite;
+      }
+      
+      .hero-heading-container {
+        position: relative;
+      }
     </style>
   </head>
   <body>
@@ -132,10 +156,34 @@
       <!-- CENTER: Hero Content -->
       <main class="relative z-10 max-w-5xl px-6 text-center mt-[-2rem]">
         <div id="hero-content" class="space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
-          <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight">
-            Smart Solutions <br/>
-            <span class="text-muted-foreground italic">for Every Brand.</span>
-          </h1>
+          <div class="hero-heading-container">
+            <!-- Animated Wave Background for Text -->
+            <svg class="wave-text-bg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+              <defs>
+                <style>
+                  @keyframes wave-motion {
+                    0% { transform: translateX(0); }
+                    50% { transform: translateX(50px); }
+                    100% { transform: translateX(0); }
+                  }
+                  .wave-path {
+                    fill: none;
+                    stroke: currentColor;
+                    stroke-width: 3;
+                    animation: wave-motion 8s ease-in-out infinite;
+                  }
+                </style>
+              </defs>
+              <path class="wave-path" d="M0,100 Q300,50 600,100 T1200,100" />
+              <path class="wave-path" d="M0,120 Q300,70 600,120 T1200,120" style="stroke-width: 2; opacity: 0.6; animation-delay: 0.2s;" />
+              <path class="wave-path" d="M0,140 Q300,90 600,140 T1200,140" style="stroke-width: 2; opacity: 0.4; animation-delay: 0.4s;" />
+            </svg>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-10">
+              Smart Solutions <br/>
+              <span class="text-muted-foreground italic">for Every Brand.</span>
+            </h1>
+          </div>
           
           <!-- Main CTA -->
           <div class="flex justify-center">
