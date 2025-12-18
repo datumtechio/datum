@@ -17,11 +17,11 @@ export default function Home() {
     <div className="h-screen w-screen bg-background text-foreground overflow-hidden relative flex items-center justify-center selection:bg-primary selection:text-primary-foreground">
       
       {/* Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
           src={heroBg} 
           alt="Background" 
-          className="w-full h-full object-cover opacity-10 grayscale contrast-125"
+          className="w-full h-full object-cover opacity-10 grayscale contrast-125 animate-wave"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
       </div>

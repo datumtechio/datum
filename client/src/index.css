@@ -133,3 +133,27 @@
     @apply font-serif;
   }
 }
+
+@keyframes wave-shift {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(2%) translateY(-1%);
+  }
+  50% {
+    transform: translateX(0) translateY(0);
+  }
+  75% {
+    transform: translateX(-2%) translateY(1%);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@layer utilities {
+  .animate-wave {
+    animation: wave-shift 8s ease-in-out infinite;
+  }
+}
