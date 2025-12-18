@@ -23,6 +23,31 @@
     
     <!-- Link to Tailwind CSS -->
     <link rel="stylesheet" href="/src/index.css" />
+    
+    <!-- Wave Animation Style -->
+    <style>
+      @keyframes wave-shift {
+        0% {
+          transform: translateX(0) translateY(0) scale(1.08);
+        }
+        25% {
+          transform: translateX(1%) translateY(-0.5%) scale(1.08);
+        }
+        50% {
+          transform: translateX(0) translateY(0) scale(1.08);
+        }
+        75% {
+          transform: translateX(-1%) translateY(0.5%) scale(1.08);
+        }
+        100% {
+          transform: translateX(0) translateY(0) scale(1.08);
+        }
+      }
+      
+      .animate-wave {
+        animation: wave-shift 8s ease-in-out infinite;
+      }
+    </style>
   </head>
   <body>
     <div class="h-screen w-screen bg-background text-foreground overflow-hidden relative flex items-center justify-center selection:bg-primary selection:text-primary-foreground">
