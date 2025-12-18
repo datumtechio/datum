@@ -156,29 +156,14 @@
       <!-- CENTER: Hero Content -->
       <main class="relative z-10 max-w-5xl px-6 text-center mt-[-2rem]">
         <div id="hero-content" class="space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
-          <div class="hero-heading-container">
-            <!-- Full Background Wave Animation -->
-            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none" style="opacity: 0.25; z-index: 0;">
-              <defs>
-                <style>
-                  @keyframes wave-flow {
-                    0% { transform: translateX(0); }
-                    50% { transform: translateX(100px); }
-                    100% { transform: translateX(0); }
-                  }
-                  .wave-bg-path {
-                    fill: none;
-                    stroke: currentColor;
-                    stroke-width: 8;
-                    animation: wave-flow 10s ease-in-out infinite;
-                  }
-                </style>
-              </defs>
-              <path class="wave-bg-path" d="M0,200 Q300,50 600,200 T1200,200" />
-              <path class="wave-bg-path" d="M0,350 Q300,200 600,350 T1200,350" style="stroke-width: 6; opacity: 0.8; animation-delay: 0.3s;" />
-              <path class="wave-bg-path" d="M0,500 Q300,350 600,500 T1200,500" style="stroke-width: 6; opacity: 0.6; animation-delay: 0.6s;" />
-              <path class="wave-bg-path" d="M0,650 Q300,500 600,650 T1200,650" style="stroke-width: 5; opacity: 0.4; animation-delay: 0.9s;" />
-            </svg>
+          <div class="hero-heading-container relative">
+            <!-- Animated Wave Background for Entire Section -->
+            <img 
+              id="hero-wave-bg"
+              alt="Background wave" 
+              class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale contrast-125 animate-wave"
+              style="will-change: transform; z-index: 0;"
+            />
             
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20">
               Smart Solutions <br/>
@@ -207,13 +192,23 @@
             yearSpan.textContent = `© ${new Date().getFullYear()} DatumTech`;
         }
 
-        // Load wave background image
+        // Load wave background image for main background
         const waveBg = document.getElementById('wave-bg');
         if(waveBg) {
           waveBg.src = '/attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png';
           waveBg.onerror = () => {
             console.warn('Wave image failed to load from /attached_assets/, trying alternate path');
             waveBg.src = '../../../attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png';
+          };
+        }
+        
+        // Load wave background image for hero section
+        const heroWaveBg = document.getElementById('hero-wave-bg');
+        if(heroWaveBg) {
+          heroWaveBg.src = '/attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png';
+          heroWaveBg.onerror = () => {
+            console.warn('Hero wave image failed to load');
+            heroWaveBg.src = '../../../attached_assets/generated_images/abstract_elegant_black_and_white_fluid_waves.png';
           };
         }
 
