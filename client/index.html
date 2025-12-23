@@ -111,13 +111,13 @@
         box-shadow: 0 0 20px currentColor;
       }
 
-      /* Parallax effect for waves */
       .wave-container {
         position: absolute;
         width: 200%;
         height: 100%;
         opacity: 0.08;
         transition: transform 0.05s ease-out;
+        will-change: transform;
       }
 
       /* Button hover glow */
@@ -417,11 +417,11 @@
             const percentY = (mouseY - centerY) / centerY;
 
             waveContainers.forEach((wave, index) => {
-              // Increased multipliers for more pronounced wave following
-              const speed = (index + 1) * 25; // Increased from 10
+              // Much more pronounced wave following effect
+              const speed = (index + 1) * 60; // Increased significantly
               const offsetX = percentX * speed;
-              const offsetY = percentY * speed * 0.5; // Increased from 0.3
-              wave.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+              const offsetY = percentY * speed * 1.2; // Increased vertical movement
+              wave.style.transform = `translate(${offsetX}px, ${offsetY}px) translateZ(0)`;
             });
           });
 
