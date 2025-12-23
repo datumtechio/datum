@@ -194,19 +194,19 @@
       <div class="floating-particles" id="particles-container"></div>
       
       <!-- Background -->
-      <div class="absolute inset-0 z-0 overflow-hidden" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%);">
+      <div class="absolute inset-0 z-0 overflow-hidden" id="parallax-bg" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%);">
         <!-- Animated Wave Background -->
-        <div class="wave-container wave-1">
+        <div class="wave-container wave-1" style="filter: blur(0.5px);">
           <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1200 120">
             <path d="M0,40 Q300,10 600,40 T1200,40 L1200,120 L0,120 Z" fill="currentColor"/>
           </svg>
         </div>
-        <div class="wave-container wave-2" style="opacity: 0.06;">
+        <div class="wave-container wave-2" style="opacity: 0.06; filter: blur(0.5px);">
           <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1200 120">
             <path d="M0,60 Q300,30 600,60 T1200,60 L1200,120 L0,120 Z" fill="currentColor"/>
           </svg>
         </div>
-        <div class="wave-container wave-3">
+        <div class="wave-container wave-3" style="filter: blur(0.5px);">
           <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1200 120">
             <path d="M0,50 Q300,20 600,50 T1200,50 L1200,120 L0,120 Z" fill="currentColor"/>
           </svg>
@@ -400,6 +400,11 @@
 
         // Track mouse movement (only on non-touch devices)
         if (!isTouch) {
+          let targetX = 0;
+          let targetY = 0;
+          let currentX = 0;
+          let currentY = 0;
+
           document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
@@ -410,19 +415,26 @@
               cursorGlow.style.top = mouseY + 'px';
             }
 
-            // Enhanced parallax effect on waves - makes them follow cursor more dramatically
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const percentX = (mouseX - centerX) / centerX;
-            const percentY = (mouseY - centerY) / centerY;
+            // Calculate target position for smooth parallax (like actbe.co.jp)
+            targetX = (mouseX - window.innerWidth / 2) * 0.03;
+            targetY = (mouseY - window.innerHeight / 2) * 0.03;
 
-            waveContainers.forEach((wave, index) => {
-              // Much more pronounced wave following effect
-              const speed = (index + 1) * 60; // Increased significantly
-              const offsetX = percentX * speed;
-              const offsetY = percentY * speed * 1.2; // Increased vertical movement
-              wave.style.transform = `translate(${offsetX}px, ${offsetY}px) translateZ(0)`;
-            });
+            // Smooth animation using requestAnimationFrame
+            function smoothParallax() {
+              currentX += (targetX - currentX) * 0.1;
+              currentY += (targetY - currentY) * 0.1;
+
+              const parallaxBg = document.getElementById('parallax-bg');
+              if (parallaxBg) {
+                parallaxBg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+              }
+
+              if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
+                requestAnimationFrame(smoothParallax);
+              }
+            }
+
+            smoothParallax();
           });
 
           // Cursor glow active state on click/hover
@@ -438,10 +450,11 @@
             }
           });
         } else {
-          // Reset wave transforms on touch devices
-          waveContainers.forEach((wave) => {
-            wave.style.transform = 'translate(0, 0)';
-          });
+          // Reset parallax on touch devices
+          const parallaxBg = document.getElementById('parallax-bg');
+          if (parallaxBg) {
+            parallaxBg.style.transform = 'translate(0, 0)';
+          }
         }
 
         // Button hover effects (works on both touch and non-touch)
