@@ -410,16 +410,17 @@
               cursorGlow.style.top = mouseY + 'px';
             }
 
-            // Parallax effect on waves based on mouse position
+            // Enhanced parallax effect on waves - makes them follow cursor more dramatically
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
             const percentX = (mouseX - centerX) / centerX;
             const percentY = (mouseY - centerY) / centerY;
 
             waveContainers.forEach((wave, index) => {
-              const speed = (index + 1) * 10;
+              // Increased multipliers for more pronounced wave following
+              const speed = (index + 1) * 25; // Increased from 10
               const offsetX = percentX * speed;
-              const offsetY = percentY * speed * 0.3;
+              const offsetY = percentY * speed * 0.5; // Increased from 0.3
               wave.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
             });
           });
