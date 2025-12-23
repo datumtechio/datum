@@ -83,54 +83,37 @@
         opacity: 0.05;
       }
       
-      @keyframes blob1 {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33% { transform: translate(30px, -40px) scale(1.2); }
-        66% { transform: translate(-40px, 20px) scale(0.8); }
+      /* SINGLE HUGE BLOB - MOUSE TRACKING */
+      #parallax-bg {
+        background: linear-gradient(to right, #ffffff, #f5f5f5);
       }
 
-      @keyframes blob2 {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33% { transform: translate(-50px, 30px) scale(0.9); }
-        66% { transform: translate(40px, -50px) scale(1.1); }
+      .dark #parallax-bg {
+        background: linear-gradient(to right, #0a0a0a, #1a1a1a);
       }
 
-      @keyframes blob3 {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33% { transform: translate(40px, 50px) scale(1.1); }
-        66% { transform: translate(-50px, -40px) scale(0.9); }
-      }
-
-      .blob-container {
+      .giant-blob {
         position: absolute;
-        width: 400px;
-        height: 400px;
+        width: 1200px;
+        height: 1200px;
         border-radius: 50%;
         filter: blur(60px);
-        opacity: 0.6;
+        opacity: 0.7;
+        mix-blend-mode: multiply;
         pointer-events: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+      }
+
+      .dark .giant-blob {
         mix-blend-mode: screen;
+        opacity: 0.6;
       }
 
-      .blob1 {
-        background: radial-gradient(circle at 30% 30%, rgba(100, 150, 255, 0.6), rgba(100, 150, 255, 0.1));
-        animation: blob1 15s infinite ease-in-out;
-        top: -50px;
-        left: 10%;
-      }
-
-      .blob2 {
-        background: radial-gradient(circle at 70% 70%, rgba(150, 100, 255, 0.5), rgba(150, 100, 255, 0.1));
-        animation: blob2 18s infinite ease-in-out;
-        top: 20%;
-        right: 5%;
-      }
-
-      .blob3 {
-        background: radial-gradient(circle at 50% 50%, rgba(100, 200, 150, 0.5), rgba(100, 200, 150, 0.1));
-        animation: blob3 20s infinite ease-in-out;
-        bottom: 10%;
-        left: 30%;
+      .giant-blob {
+        background: radial-gradient(circle, rgba(180, 180, 180, 1), rgba(140, 140, 140, 0.6), transparent 60%);
       }
 
       /* Custom Cursor */
@@ -226,6 +209,33 @@
       .interactive-text:hover {
         text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
       }
+
+      /* CURSOR TRAIL PARTICLES */
+      .cursor-trail {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(100, 100, 100, 0.6);
+        animation: trailFade 1s ease-out forwards;
+      }
+
+      .dark .cursor-trail {
+        background: rgba(200, 200, 200, 0.5);
+      }
+
+      @keyframes trailFade {
+        0% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0) translateY(10px);
+        }
+      }
     </style>
   </head>
   <body>
@@ -238,11 +248,9 @@
       <div class="floating-particles" id="particles-container"></div>
       
       <!-- Background -->
-      <div class="absolute inset-0 z-0 overflow-hidden" id="parallax-bg" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%);">
-        <!-- Animated Gradient Blobs -->
-        <div class="blob-container blob1"></div>
-        <div class="blob-container blob2"></div>
-        <div class="blob-container blob3"></div>
+      <div class="absolute inset-0 z-0 overflow-hidden" id="parallax-bg">
+        <!-- Giant Blob Following Mouse -->
+        <div class="giant-blob"></div>
 
         <!-- Gradient overlay -->
         <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
@@ -336,7 +344,7 @@
           
           <!-- Main CTA -->
           <div class="flex justify-center px-2">
-             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-none text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 group shadow-2xl shadow-primary/20 cursor-pointer">
+             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-lg text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 group shadow-2xl shadow-primary/20 cursor-pointer">
                 Build My Website 
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </button>
@@ -441,6 +449,16 @@
             mouseX = e.clientX;
             mouseY = e.clientY;
 
+            // Create cursor trail particles
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = (mouseX - 4) + 'px';
+            trail.style.top = (mouseY - 4) + 'px';
+            document.body.appendChild(trail);
+
+            // Remove trail after animation
+            setTimeout(() => trail.remove(), 1000);
+
             // Update cursor glow position
             if (cursorGlow) {
               cursorGlow.style.left = mouseX + 'px';
@@ -448,8 +466,8 @@
             }
 
             // Calculate target position for smooth parallax (like actbe.co.jp)
-            targetX = (mouseX - window.innerWidth / 2) * 0.03;
-            targetY = (mouseY - window.innerHeight / 2) * 0.03;
+            targetX = (mouseX - window.innerWidth / 2) * 0.2;
+            targetY = (mouseY - window.innerHeight / 2) * 0.2;
 
             // Smooth animation using requestAnimationFrame
             function smoothParallax() {
