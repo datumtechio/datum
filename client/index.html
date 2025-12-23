@@ -236,6 +236,17 @@
           transform: scale(0) translateY(10px);
         }
       }
+
+      /* Mobile optimizations */
+      @media (max-width: 640px) {
+        video {
+          display: none !important;
+        }
+
+        h1.reveal-text {
+          font-size: 1.75rem !important;
+        }
+      }
     </style>
   </head>
   <body>
