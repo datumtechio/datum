@@ -190,6 +190,9 @@
       <!-- Custom Cursor Glow -->
       <div class="cursor-glow"></div>
       
+      <!-- Floating Particles Background -->
+      <div class="floating-particles" id="particles-container"></div>
+      
       <!-- Background -->
       <div class="absolute inset-0 z-0 overflow-hidden" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%);">
         <!-- Animated Wave Background -->
@@ -216,6 +219,12 @@
       <!-- TOP BAR -->
       <header class="absolute top-0 left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex justify-between items-start">
         <div class="text-xl sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity">DatumTech.</div>
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle" class="relative w-14 h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary" title="Toggle dark mode">
+          <div class="absolute top-1 left-1 w-6 h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
+            <span id="theme-icon" class="text-xs">☀️</span>
+          </div>
+        </button>
       </header>
 
       <!-- Services List - Top Center -->
@@ -287,9 +296,9 @@
               <source src="/attached_assets/generated_videos/animated_elegant_waves_loop.mp4" type="video/mp4">
             </video>
             
-            <h1 class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20" style="padding-bottom: 4%; sm: 6%; md: 8%;">
-              Smart Solutions <br/>
-              <span class="text-muted-foreground italic">for Every Brand. </span>
+            <h1 class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20 reveal-text" style="padding-bottom: 4%; sm: 6%; md: 8%;">
+              <span class="reveal-line">Smart Solutions</span> <br/>
+              <span class="text-muted-foreground italic reveal-line">for Every Brand.</span>
             </h1>
           </div>
           
@@ -308,6 +317,59 @@
     <!-- Vanilla JS for Animations & Dynamic Date -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        // ===== DARK MODE TOGGLE =====
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Check saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+
+        if (isDark) {
+          htmlElement.classList.add('dark');
+          themeIcon.textContent = '🌙';
+        } else {
+          htmlElement.classList.remove('dark');
+          themeIcon.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+          htmlElement.classList.toggle('dark');
+          const isDarkNow = htmlElement.classList.contains('dark');
+          localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+          themeIcon.textContent = isDarkNow ? '🌙' : '☀️';
+        });
+
+        // ===== FLOATING PARTICLES =====
+        function createParticles() {
+          const container = document.getElementById('particles-container');
+          const particleCount = window.innerWidth > 1024 ? 30 : 15;
+
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 3 + 1;
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const duration = Math.random() * 20 + 15;
+            const delay = Math.random() * 5;
+
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = startX + '%';
+            particle.style.top = startY + '%';
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = delay + 's';
+
+            container.appendChild(particle);
+          }
+        }
+
+        createParticles();
+
         // Update Copyright Year
         const yearSpan = document.getElementById('copyright');
         if(yearSpan) {
