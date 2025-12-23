@@ -157,3 +157,59 @@
     animation: wave-shift 8s ease-in-out infinite;
   }
 }
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Reduce animation complexity on small screens */
+  .wave-1 {
+    animation: wave-slide-1 20s linear infinite !important;
+  }
+
+  .wave-2 {
+    animation: wave-slide-2 25s linear infinite !important;
+  }
+
+  .wave-3 {
+    animation: wave-slide-1 30s linear infinite !important;
+  }
+
+  /* Optimize cursor for small screens */
+  .cursor-glow {
+    display: none !important;
+  }
+
+  /* Button ripple optimization */
+  .cta-button::before {
+    width: 0;
+    height: 0;
+  }
+
+  .cta-button:active::before {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Reduce button shadow on mobile */
+  .cta-button {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .cta-button:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Ensure touch targets are at least 44x44px */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
