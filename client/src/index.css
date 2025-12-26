@@ -266,8 +266,12 @@
     display: flex !important;
   }
 
-  main, header, footer {
+  main, footer {
     flex-shrink: 0;
+    position: relative !important;
+  }
+
+  header {
     position: relative !important;
   }
 
@@ -397,7 +401,6 @@
     padding: 0.25rem 0.75rem !important;
     margin: 0 !important;
     border-bottom: 1px solid var(--color-border);
-    position: relative !important;
     width: 100% !important;
     z-index: 50 !important;
   }
