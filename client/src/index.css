@@ -277,8 +277,8 @@
   /* Main container fits in viewport */
   main {
     margin: 0 !important;
-    padding: 1rem 0.5rem !important;
-    min-height: 50vh !important;
+    padding: 2rem 0.5rem !important;
+    min-height: calc(100vh - 180px) !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -296,11 +296,12 @@
 
   /* Hero content with proper spacing */
   #hero-content {
-    gap: 1.2rem !important;
+    gap: 2rem !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
   .hero-heading-container {
@@ -309,9 +310,9 @@
   }
 
   h1.reveal-text {
-    font-size: 1.75rem !important;
-    line-height: 1.1 !important;
-    padding-bottom: 0 !important;
+    font-size: 2rem !important;
+    line-height: 1.15 !important;
+    padding-bottom: 1.5rem !important;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
@@ -431,11 +432,11 @@
 
   /* Compact footer with visual separation */
   footer {
-    padding: 1.5rem 0.75rem 0.6rem !important;
-    gap: 0.8rem !important;
+    padding: 1.5rem 0.75rem 1rem !important;
+    gap: 1rem !important;
     min-height: auto;
     margin: 0 !important;
-    margin-top: 1.5rem !important;
+    margin-top: auto !important;
     border-top: 1px solid var(--color-border);
     position: relative !important;
     width: 100% !important;
