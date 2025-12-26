@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Digital Marketing | DatumTech</title>
+    <meta property="og:title" content="Digital Marketing Services | DatumTech" />
+    <meta property="og:description" content="Strategic digital marketing that grows your brand. Social media, ads, content, and more." />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='65' font-size='60' font-weight='900' text-anchor='middle' fill='%23ffffff' font-family='monospace'%3ED%3C/text%3E%3Ccircle cx='75' cy='25' r='8' fill='%23ffffff'/%3E%3Ccircle cx='75' cy='25' r='5' fill='%23000000'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/index.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .service-container {
+        background: linear-gradient(135deg, var(--color-background) 0%, var(--color-card) 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-header {
+        position: relative;
+        z-index: 50;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .service-header a {
+        text-lg font-serif font-bold text-foreground hover:opacity-70 transition-opacity;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .service-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      .service-hero {
+        max-width: 90%;
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .service-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--color-border);
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .dark .service-badge {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .service-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        font-family: 'Space Grotesk', sans-serif;
+        margin: 1rem 0;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      @media (max-width: 640px) {
+        .service-title {
+          font-size: 1.75rem;
+        }
+      }
+
+      .service-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-muted-foreground);
+        margin: 1.5rem 0 2rem 0;
+        max-width: 600px;
+      }
+
+      .service-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .feature-item {
+        padding: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .feature-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .feature-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .cta-section {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--color-primary);
+        background: var(--color-primary);
+        color: var(--color-primary-foreground);
+        text-decoration: none;
+        border-radius: 0.375rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--color-primary);
+      }
+
+      .btn-outline:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .service-container {
+          min-height: 100vh;
+        }
+
+        .service-content {
+          padding: 1.5rem 1rem;
+        }
+
+        .service-title {
+          font-size: 1.5rem;
+        }
+
+        .service-description {
+          font-size: 0.9rem;
+        }
+
+        .service-features {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+
+        .feature-item {
+          padding: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="service-container">
+      <!-- Header with back button -->
+      <div class="service-header">
+        <a href="/">← Back to Home</a>
+      </div>
+
+      <!-- Service Content -->
+      <div class="service-content">
+        <div class="service-hero">
+          <div class="service-badge">Digital Marketing</div>
+          
+          <h1 class="service-title">
+            Grow Your Audience & Revenue
+          </h1>
+          
+          <p class="service-description">
+            Our strategic digital marketing services amplify your brand presence across all platforms. From targeted social media campaigns to data-driven ads, we create cohesive strategies that turn followers into customers.
+          </p>
+
+          <!-- Features -->
+          <div class="service-features">
+            <div class="feature-item">
+              <div class="feature-icon">📱</div>
+              <div class="feature-name">Social Media</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">📢</div>
+              <div class="feature-name">Paid Ads</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✍️</div>
+              <div class="feature-name">Content</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🎯</div>
+              <div class="feature-name">Targeting</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">📈</div>
+              <div class="feature-name">Analytics</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">💬</div>
+              <div class="feature-name">Community</div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="cta-section">
+            <a href="mailto:start@datumtech.io" class="btn">Get Your Strategy</a>
+            <a href="https://wa.me/9613373049" class="btn btn-outline">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Dark mode toggle
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+  </body>
+</html>
