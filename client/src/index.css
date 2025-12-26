@@ -278,14 +278,17 @@
   main {
     margin: 0 auto !important;
     padding: 2rem 0.5rem !important;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-height: calc(100vh - 180px);
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    min-height: calc(100vh - 180px) !important;
     z-index: 10 !important;
     order: 2;
+    position: relative !important;
+    left: 0;
+    right: 0;
   }
 
   header {
