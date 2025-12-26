@@ -248,10 +248,90 @@
   background: var(--color-foreground);
 }
 
-/* MOBILE RESPONSIVENESS */
+/* MOBILE RESPONSIVENESS - ONE FOLD LAYOUT */
 @media (max-width: 640px) {
   body {
     overflow-x: hidden;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* Main container fits in viewport */
+  main {
+    margin-top: 0 !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Compress spacing */
+  #hero-content {
+    gap: 0.75rem !important;
+  }
+
+  .hero-heading-container {
+    min-height: auto;
+  }
+
+  h1.reveal-text {
+    font-size: 1.25rem !important;
+    line-height: 1.1 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Compact button */
+  .cta-button {
+    padding: 0.5rem 1rem !important;
+    height: 40px !important;
+    font-size: 0.875rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .cta-button::before {
+    width: 0;
+    height: 0;
+  }
+
+  .cta-button:active::before {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Compact header */
+  header {
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  header .text-lg {
+    font-size: 0.875rem !important;
+  }
+
+  /* Compact footer */
+  footer {
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.5rem !important;
+    min-height: auto;
+  }
+
+  footer .text-xs,
+  footer .text-sm {
+    font-size: 0.625rem !important;
+  }
+
+  /* Social icons - smaller on mobile */
+  footer .social-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  footer .social-icon svg {
+    width: 16px !important;
+    height: 16px !important;
   }
 
   /* Reduce animation complexity on small screens */
@@ -272,45 +352,14 @@
     display: none !important;
   }
 
-  /* Button ripple optimization */
-  .cta-button::before {
-    width: 0;
-    height: 0;
-  }
-
-  .cta-button:active::before {
-    width: 200px;
-    height: 200px;
-  }
-
   /* Hide nav on very small screens */
   .flex-wrap {
     gap: 0.25rem !important;
   }
 
-  /* Adjust footer spacing on mobile */
-  footer {
-    padding: 1rem 1rem !important;
-    gap: 1rem !important;
-  }
-
-  /* Social icons in footer */
-  footer .social-icon {
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Hero content adjustments */
-  main {
-    margin-top: 0 !important;
-    padding-top: 1rem;
-  }
-
-  h1.reveal-text {
-    font-size: 1.5rem !important;
+  /* Hide mobile nav section to save space */
+  header > div:last-child {
+    display: none !important;
   }
 }
 
