@@ -29,14 +29,52 @@
       .service-header {
         position: relative;
         z-index: 50;
-        padding: 1rem 1rem;
+        padding: 0.25rem 0.75rem;
         border-bottom: 1px solid var(--color-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
-      .service-header a {
-        text-lg font-serif font-bold text-foreground hover:opacity-70 transition-opacity;
-        cursor: pointer;
+      .service-header .logo {
+        text-lg font-serif font-bold tracking-tight cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0;
+      }
+
+      .service-nav {
+        hidden sm:flex flex-1 justify-center pointer-events-none px-4;
+      }
+
+      .service-nav-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem 1.5rem;
+        text-xs sm:text-sm font-medium tracking-wide text-muted-foreground uppercase;
+      }
+
+      .service-nav-items a {
         text-decoration: none;
+        color: inherit;
+        hover:text-foreground;
+        transition: colors 0.3s;
+      }
+
+      .service-nav-items a:hover {
+        color: var(--color-foreground);
+      }
+
+      .nav-divider {
+        color: var(--color-border);
+      }
+
+      .theme-toggle {
+        relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0;
+        border: none;
+        cursor: pointer;
+      }
+
+      .theme-toggle:hover {
+        background: var(--color-input);
       }
 
       .service-content {
@@ -201,9 +239,38 @@
   </head>
   <body>
     <div class="service-container">
-      <!-- Header with back button -->
+      <!-- Header with navigation matching homepage -->
       <div class="service-header">
-        <a href="/">← Back to Home</a>
+        <div class="logo">DatumTech.</div>
+        
+        <!-- Services List - Hidden on Mobile, inline on desktop -->
+        <div class="hidden sm:flex flex-1 justify-center pointer-events-none px-4">
+          <div class="service-nav-items pointer-events-auto">
+            <a href="/web-dev.html">Web Dev</a>
+            <span class="hidden sm:inline nav-divider">•</span>
+            <a href="/digital-marketing.html">Digital Marketing</a>
+            <span class="hidden sm:inline nav-divider">•</span>
+            <a href="/app-dev.html">App Dev</a>
+          </div>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="dark-mode-toggle" title="Toggle dark mode">
+          <div style="position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; background: var(--color-foreground); border-radius: 50%; transition: transform 300ms; display: flex; align-items: center; justify-content: center;">
+            <span id="theme-icon" style="font-size: 12px;">☀️</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Mobile Nav - Stack below header on mobile -->
+      <div class="flex sm:hidden justify-center mt-3 px-2" style="padding: 0.75rem; border-bottom: 1px solid var(--color-border);">
+        <div class="service-nav-items">
+          <a href="/web-dev.html">Web Dev</a>
+          <span class="nav-divider">•</span>
+          <a href="/digital-marketing.html">Digital Marketing</a>
+          <span class="nav-divider">•</span>
+          <a href="/app-dev.html">App Dev</a>
+        </div>
       </div>
 
       <!-- Service Content -->
@@ -228,14 +295,31 @@
             <div class="feature-item">
               <div class="feature-icon">📢</div>
               <div class="feature-name">Paid Ads</div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">✍️</div>
-              <div class="feature-name">Content</div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">🎯</div>
-              <div class="feature-name">Targeting</div>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+
+        if (isDark) {
+          htmlElement.classList.add('dark');
+          themeIcon.textContent = '🌙';
+        } else {
+          htmlElement.classList.remove('dark');
+          themeIcon.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+          htmlElement.classList.toggle('dark');
+          const isDarkNow = htmlElement.classList.contains('dark');
+          localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+          themeIcon.textContent = isDarkNow ? '🌙' : '☀️';
+        });
+      });       <div class="feature-name">Targeting</div>
             </div>
             <div class="feature-item">
               <div class="feature-icon">📈</div>
