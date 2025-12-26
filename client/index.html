@@ -325,8 +325,8 @@
       }
     </style>
   </head>
-  <body>
-    <div class="h-screen w-screen bg-background text-foreground overflow-hidden relative flex items-center justify-center selection:bg-primary selection:text-primary-foreground sm:overflow-hidden md:overflow-hidden" id="main-container">
+  <body style="margin: 0; padding: 0;">
+    <div class="bg-background text-foreground relative flex flex-col selection:bg-primary selection:text-primary-foreground sm:overflow-hidden md:overflow-hidden" id="main-container" style="min-height: 100vh; overflow-y: auto;">
       
       <!-- Custom Cursor Glow -->
       <div class="cursor-glow"></div>
@@ -347,7 +347,7 @@
       <div class="datum-cursor" id="datum-cursor" style="display: none;"></div>
 
       <!-- TOP BAR -->
-      <header class="absolute sm:absolute top-0 left-0 w-full p-3 sm:p-8 md:p-12 z-50 md:absolute">
+      <header class="sm:absolute sm:top-0 left-0 w-full p-3 sm:p-8 md:p-12 z-50">
         <div class="flex justify-between items-center gap-2 sm:gap-4">
           <div class="text-lg sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0">DatumTech.</div>
           
