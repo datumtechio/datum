@@ -248,12 +248,13 @@
   background: var(--color-foreground);
 }
 
-/* GLOBAL LAYOUT - FIX STRUCTURE */
+/* GLOBAL LAYOUT - ONE FOLD LAYOUT */
 #main-container {
   display: flex !important;
   flex-direction: column !important;
   min-height: 100vh !important;
-  overflow-y: auto !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
 }
 
 header {
@@ -268,15 +269,17 @@ main {
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
-  margin: 0 auto !important;
-  padding: 2rem 0.5rem !important;
+  margin: 0 !important;
+  padding: 1rem 0.5rem !important;
   z-index: 10 !important;
+  overflow: hidden !important;
 }
 
 footer {
   flex-shrink: 0 !important;
   position: static !important;
   z-index: 50 !important;
+  overflow: hidden !important;
 }
 
 /* MOBILE RESPONSIVENESS - ONE FOLD LAYOUT */
