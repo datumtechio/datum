@@ -15,7 +15,7 @@
     <meta name="twitter:description" content="Smart Solutions for Every Brand." />
     <meta name="twitter:image" content="/og-image.png" />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='65' font-size='60' font-weight='900' text-anchor='middle' fill='%23ffffff' font-family='monospace'%3ED%3C/text%3E%3Ccircle cx='75' cy='25' r='8' fill='%23ffffff'/%3E%3Ccircle cx='75' cy='25' r='5' fill='%23000000'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Import Space Grotesk and other fonts -->
@@ -98,22 +98,32 @@
         height: 1200px;
         border-radius: 50%;
         filter: blur(60px);
-        opacity: 0.7;
+        opacity: 0;
         mix-blend-mode: multiply;
         pointer-events: none;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         will-change: transform;
+        display: none;
       }
 
-      .dark .giant-blob {
-        mix-blend-mode: screen;
+      /* DATUM CURSOR FOLLOWER */
+      .datum-cursor {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9997;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Space Grotesk', monospace;
+        color: currentColor;
+        opacity: 0.5;
+        transform: translate(-50%, -50%);
+        letter-spacing: 1px;
+      }
+
+      .dark .datum-cursor {
         opacity: 0.6;
-      }
-
-      .giant-blob {
-        background: radial-gradient(circle, rgba(180, 180, 180, 1), rgba(140, 140, 140, 0.6), transparent 60%);
       }
 
       /* Custom Cursor */
@@ -178,6 +188,42 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       }
 
+      /* Professional refinements */
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        scroll-behavior: smooth;
+      }
+
+      /* Enhanced link styling */
+      a {
+        position: relative;
+        text-decoration: none;
+      }
+
+      /* Smooth transitions for all interactive elements */
+      button, a, [role="button"] {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Focus states for accessibility */
+      button:focus-visible, a:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+
+      /* Refined social icon styling */
+      .social-icon {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .social-icon:hover {
+        transform: translateY(-2px);
+      }
+
       /* Text shimmer effect on hover */
       .shimmer {
         background: linear-gradient(90deg, currentColor, currentColor 45%, rgba(255,255,255,0.3) 50%, currentColor 55%, currentColor);
@@ -215,15 +261,16 @@
         position: fixed;
         pointer-events: none;
         z-index: 9998;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(100, 100, 100, 0.6);
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Space Grotesk', monospace;
+        color: currentColor;
+        opacity: 0.5;
         animation: trailFade 1s ease-out forwards;
       }
 
       .dark .cursor-trail {
-        background: rgba(200, 200, 200, 0.5);
+        opacity: 0.6;
       }
 
       @keyframes trailFade {
@@ -237,7 +284,7 @@
         }
       }
 
-      /* Mobile optimizations */
+      <!-- Mobile optimizations -->
       @media (max-width: 640px) {
         video {
           display: none !important;
@@ -245,6 +292,35 @@
 
         h1.reveal-text {
           font-size: 1.75rem !important;
+        }
+
+        /* Better spacing on mobile */
+        header {
+          padding: 1rem 0.75rem !important;
+        }
+
+        .flex-wrap {
+          gap: 0.25rem !important;
+          font-size: 0.7rem !important;
+        }
+
+        /* Improve button size on mobile */
+        .cta-button {
+          font-size: 0.95rem !important;
+          padding: 0.75rem 1.5rem !important;
+          height: 2.5rem !important;
+        }
+
+        /* Hide nav items on very small screens, show as icons */
+        .flex-wrap span {
+          display: none;
+        }
+
+        .flex-wrap span:nth-child(1),
+        .flex-wrap span:nth-child(3),
+        .flex-wrap span:nth-child(5) {
+          display: inline-block;
+          font-size: 0.65rem;
         }
       }
     </style>
@@ -267,67 +343,121 @@
         <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
       </div>
 
+      <!-- DATUM Cursor Follower -->
+      <div class="datum-cursor" id="datum-cursor" style="display: none;"></div>
+
       <!-- TOP BAR -->
-      <header class="absolute top-0 left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex justify-between items-start">
-        <div class="text-xl sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity">DatumTech.</div>
-        <!-- Dark Mode Toggle -->
-        <button id="dark-mode-toggle" class="relative w-14 h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary" title="Toggle dark mode">
-          <div class="absolute top-1 left-1 w-6 h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
-            <span id="theme-icon" class="text-xs">☀️</span>
+      <header class="absolute top-0 left-0 w-full p-3 sm:p-8 md:p-12 z-50">
+        <div class="flex justify-between items-center gap-2 sm:gap-4">
+          <div class="text-lg sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0">DatumTech.</div>
+          
+          <!-- Services List - Hidden on Mobile, inline on desktop -->
+          <div class="hidden sm:flex flex-1 justify-center pointer-events-none px-4">
+            <div class="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1 text-xs sm:text-sm font-medium tracking-wide text-muted-foreground uppercase pointer-events-auto">
+              <span>Web Dev</span>
+              <span class="hidden sm:inline text-border">•</span>
+              <span>Digital Marketing</span>
+              <span class="hidden sm:inline text-border">•</span>
+              <span>App Dev</span>
+            </div>
           </div>
-        </button>
+          
+          <!-- Dark Mode Toggle -->
+          <button id="dark-mode-toggle" class="relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0" title="Toggle dark mode">
+            <div class="absolute top-1 left-1 w-5 sm:w-6 h-5 sm:h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
+              <span id="theme-icon" class="text-xs">☀️</span>
+            </div>
+          </button>
+        </div>
+        
+        <!-- Mobile Nav - Stack below header on mobile -->
+        <div class="flex sm:hidden justify-center mt-3 px-2">
+          <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            <span>Web Dev</span>
+            <span class="text-border">•</span>
+            <span>Digital Marketing</span>
+            <span class="text-border">•</span>
+            <span>App Dev</span>
+          </div>
+        </div>
       </header>
 
-      <!-- Services List - Top Center -->
-      <div class="absolute top-20 sm:top-24 md:top-32 left-0 w-full z-40 flex justify-center pointer-events-none px-4">
+      <!-- Services List - Top Center (Hidden, kept for reference) -->
+      <div class="absolute top-20 sm:top-24 md:top-32 left-0 w-full z-40 flex justify-center pointer-events-none px-4 hidden">
         <div class="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-2 text-xs sm:text-sm font-medium tracking-wide text-muted-foreground uppercase pointer-events-auto">
           <span>Web Dev</span>
           <span class="hidden sm:inline text-border">•</span>
-          <span>Marketing</span>
+          <span>Digital Marketing</span>
           <span class="hidden sm:inline text-border">•</span>
-          <span>Brand</span>
+          <span>App Dev</span>
         </div>
       </div>
 
-      <!-- LEFT: Socials (Vertical) -->
+      <!-- LEFT: Socials (Vertical) - Desktop Only -->
       <div class="absolute left-0 top-1/2 -translate-y-1/2 p-4 sm:p-8 z-50 hidden md:flex flex-col gap-8 items-center">
         <div class="h-24 w-px bg-border"></div>
-        <a href="#" class="hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+        <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
           <!-- Linkedin Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="#" class="hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+        <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
           <!-- X Icon -->
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
         </a>
-        <a href="mailto:start@datumtech.io" class="hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+        <a href="mailto:start@datumtech.io" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
           <!-- Mail Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        <a href="https://wa.me/9613373049" target="_blank" class="social-icon hover:text-green-500 transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <!-- WhatsApp Logo -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" class="w-5 h-5" fill="currentColor">
+            <defs><path id="a" d="M0 0h175.216v175.552H0z"/></defs>
+            <clipPath id="b"><use href="#a" overflow="visible"/></clipPath>
+            <path clip-path="url(#b)" d="M87.608 0C39.251 0 0 39.251 0 87.608c0 15.462 4.004 30.254 11.057 43.052L0 175.552l45.897-12.104c12.798 6.758 27.588 10.761 43.052 10.761 48.357 0 87.608-39.251 87.608-87.608S135.965 0 87.608 0z" fill="currentColor"/>
+            <path d="M131.771 108.055c-2.652-1.326-15.667-7.738-18.101-8.612-2.434-.874-4.21-1.326-5.986 1.326-1.776 2.652-6.886 8.612-8.436 10.388-1.55 1.776-3.1 1.994-5.752.668-2.652-1.326-11.194-4.13-21.315-13.143-7.883-7.034-13.207-15.739-14.757-18.391-1.55-2.652-.168-4.092 1.159-5.42 1.19-1.19 2.652-3.1 3.978-4.65 1.326-1.55 1.776-2.652.888-4.428-.888-1.776-6.112-14.757-8.436-20.206-2.216-5.206-4.47-4.504-5.986-4.59l-5.097-.087c-1.776 0-4.65.668-7.084 3.32-2.434 2.652-9.304 9.08-9.304 22.062s9.52 25.59 10.846 27.366c1.326 1.776 18.688 28.572 45.33 40.062 6.332 2.738 11.27 4.37 15.132 5.594 6.354 2.016 12.134 1.73 16.704 1.048 5.096-.763 15.667-6.398 17.899-12.573 2.232-6.175 2.232-11.46.668-12.573-1.55-1.326-3.978-2.108-6.63-3.434z" fill="#FFF"/>
+          </svg>
         </a>
         <div class="h-24 w-px bg-border"></div>
       </div>
 
       <!-- BOTTOM BAR -->
-      <footer class="absolute bottom-0 left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex flex-col gap-6 sm:gap-8 md:flex-row md:justify-between md:items-end">
+      <footer class="absolute bottom-0 left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex flex-col gap-4 sm:gap-6 md:gap-8 justify-center items-center">
         
-        <!-- Address -->
-        <div class="text-xs sm:text-sm text-muted-foreground font-light flex flex-col gap-1">
+        <!-- Mobile Social Icons - Show only on mobile -->
+        <div class="flex md:hidden gap-6 justify-center items-center">
+          <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <!-- Linkedin Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <!-- X Icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="mailto:start@datumtech.io" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <!-- Mail Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+          <a href="https://wa.me/9613373049" target="_blank" class="social-icon hover:text-green-500 transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <!-- WhatsApp Logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" class="w-5 h-5" fill="currentColor">
+              <defs><path id="a" d="M0 0h175.216v175.552H0z"/></defs>
+              <clipPath id="b"><use href="#a" overflow="visible"/></clipPath>
+              <path clip-path="url(#b)" d="M87.608 0C39.251 0 0 39.251 0 87.608c0 15.462 4.004 30.254 11.057 43.052L0 175.552l45.897-12.104c12.798 6.758 27.588 10.761 43.052 10.761 48.357 0 87.608-39.251 87.608-87.608S135.965 0 87.608 0z" fill="currentColor"/>
+              <path d="M131.771 108.055c-2.652-1.326-15.667-7.738-18.101-8.612-2.434-.874-4.21-1.326-5.986 1.326-1.776 2.652-6.886 8.612-8.436 10.388-1.55 1.776-3.1 1.994-5.752.668-2.652-1.326-11.194-4.13-21.315-13.143-7.883-7.034-13.207-15.739-14.757-18.391-1.55-2.652-.168-4.092 1.159-5.42 1.19-1.19 2.652-3.1 3.978-4.65 1.326-1.55 1.776-2.652.888-4.428-.888-1.776-6.112-14.757-8.436-20.206-2.216-5.206-4.47-4.504-5.986-4.59l-5.097-.087c-1.776 0-4.65.668-7.084 3.32-2.434 2.652-9.304 9.08-9.304 22.062s9.52 25.59 10.846 27.366c1.326 1.776 18.688 28.572 45.33 40.062 6.332 2.738 11.27 4.37 15.132 5.594 6.354 2.016 12.134 1.73 16.704 1.048 5.096-.763 15.667-6.398 17.899-12.573 2.232-6.175 2.232-11.46.668-12.573-1.55-1.326-3.978-2.108-6.63-3.434z" fill="#FFF"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Address (Centered with top padding) -->
+        <div class="text-xs sm:text-sm text-muted-foreground font-light flex flex-col gap-1 items-center">
           <div class="flex items-center gap-2">
             <span class="uppercase tracking-widest font-medium text-foreground">Beirut, Lebanon</span>
           </div>
           <span class="opacity-60 text-xs" id="copyright">© 2025 DatumTech</span>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="flex flex-col items-start gap-1 text-xs sm:text-base">
-          <a href="mailto:hello@datumtech.com" class="font-medium hover:underline underline-offset-4 truncate">
-            hello@datumtech.com
-          </a>
-          <a href="tel:+9613000000" class="text-muted-foreground font-light hover:text-foreground transition-colors">
-            +961 3 000 000
-          </a>
         </div>
       </footer>
 
@@ -355,9 +485,8 @@
           
           <!-- Main CTA -->
           <div class="flex justify-center px-2">
-             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-lg text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 group shadow-2xl shadow-primary/20 cursor-pointer">
-                Build My Website 
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-lg text-base sm:text-lg md:text-xl px-6 sm:px-10 md:px-14 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/80 active:scale-95 transition-all duration-200 group shadow-2xl shadow-primary/30 cursor-pointer uppercase tracking-wider">
+                Build My Solution
               </button>
           </div>
         </div>
@@ -436,6 +565,7 @@
 
         // ===== MOUSE MOVEMENT EFFECTS =====
         const cursorGlow = document.querySelector('.cursor-glow');
+        const datumCursor = document.getElementById('datum-cursor');
         const waveContainers = document.querySelectorAll('.wave-container');
         const body = document.body;
         
@@ -449,31 +579,50 @@
           cursorGlow.style.display = 'none';
         }
 
-        // Track mouse movement (only on non-touch devices)
+        // Hide datum cursor on touch devices
+        if (isTouch && datumCursor) {
+          datumCursor.style.display = 'none';
+        }
         if (!isTouch) {
           let targetX = 0;
           let targetY = 0;
           let currentX = 0;
           let currentY = 0;
+          let lastTrailX = 0;
+          let lastTrailY = 0;
 
           document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            // Create cursor trail particles
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.left = (mouseX - 4) + 'px';
-            trail.style.top = (mouseY - 4) + 'px';
-            document.body.appendChild(trail);
+            // Create cursor trail particles - only every 15px to space them out
+            const distance = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
+            if (distance > 15) {
+              const trail = document.createElement('div');
+              trail.className = 'cursor-trail';
+              trail.style.left = (mouseX - 7) + 'px';
+              trail.style.top = (mouseY - 7) + 'px';
+              trail.textContent = Math.random() > 0.5 ? '1' : '0';
+              document.body.appendChild(trail);
 
-            // Remove trail after animation
-            setTimeout(() => trail.remove(), 1000);
+              // Remove trail after animation
+              setTimeout(() => trail.remove(), 1000);
+              
+              lastTrailX = mouseX;
+              lastTrailY = mouseY;
+            }
 
             // Update cursor glow position
             if (cursorGlow) {
               cursorGlow.style.left = mouseX + 'px';
               cursorGlow.style.top = mouseY + 'px';
+            }
+
+            // Update datum cursor position and content
+            if (datumCursor) {
+              datumCursor.style.left = mouseX + 'px';
+              datumCursor.style.top = mouseY + 'px';
+              datumCursor.textContent = '</>';
             }
 
             // Calculate target position for smooth parallax (like actbe.co.jp)
