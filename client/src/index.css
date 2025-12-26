@@ -283,9 +283,10 @@
     align-items: center !important;
     justify-content: center !important;
     flex-direction: column !important;
-    flex: 1;
+    min-height: calc(100vh - 200px) !important;
     z-index: 10 !important;
     order: 2;
+    flex-grow: 1 !important;
   }
 
   header {
