@@ -272,28 +272,95 @@
     justify-content: center;
   }
 
-  /* Compress spacing */
+  /* Hero content with proper spacing */
   #hero-content {
-    gap: 0.5rem !important;
+    gap: 1.2rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-heading-container {
     min-height: auto;
+    position: relative;
   }
 
   h1.reveal-text {
-    font-size: 1.5rem !important;
-    line-height: 1 !important;
+    font-size: 1.75rem !important;
+    line-height: 1.1 !important;
     padding-bottom: 0 !important;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
-  /* Compact button */
+  /* Add decorative line under heading */
+  .hero-heading-container::after {
+    content: '';
+    position: absolute;
+    bottom: -0.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 1px;
+    animation: slideIn 0.8s ease-out 0.5s both;
+  }
+
+  @keyframes slideIn {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 60px;
+      opacity: 1;
+    }
+  }
+
+  /* Button wrapper with better spacing */
+  main > div > div:last-child {
+    margin-top: 0.8rem !important;
+  }
+
+  /* Compact button with visual interest */
   .cta-button {
-    padding: 0.4rem 0.8rem !important;
-    height: 36px !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 0.02em !important;
+    padding: 0.6rem 1.2rem !important;
+    height: 44px !important;
+    font-size: 0.825rem !important;
+    letter-spacing: 0.08em !important;
     white-space: nowrap;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 100%) !important;
+    border: 2px solid var(--color-primary) !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cta-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  .cta-button:active {
+    transform: scale(0.95) !important;
+  }
+
+  .cta-button:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
   }
 
   .cta-button::before {
@@ -306,45 +373,91 @@
     height: 100px;
   }
 
-  /* Compact header */
+  /* Compact header with visual interest */
   header {
-    padding: 0.4rem 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
     margin: 0 !important;
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.5;
   }
 
   header .text-lg {
-    font-size: 1rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
-  header > div:first-child {
-    gap: 0.5rem !important;
+  /* Style nav items on mobile */
+  header .flex-wrap span {
+    font-size: 0.65rem !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
-  /* Compact footer */
+  /* Compact footer with visual separation */
   footer {
-    padding: 0.4rem 0.5rem !important;
-    gap: 0.3rem !important;
+    padding: 0.6rem 0.75rem !important;
+    gap: 0.5rem !important;
     min-height: auto;
     margin: 0 !important;
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.5;
   }
 
   footer .text-xs,
   footer .text-sm {
-    font-size: 0.5rem !important;
+    font-size: 0.6rem !important;
     line-height: 1 !important;
+    letter-spacing: 0.05em;
   }
 
-  /* Social icons - smaller on mobile */
+  /* Social icons with hover effects */
   footer .social-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    min-height: 28px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: var(--color-input);
+    opacity: 0.8;
+  }
+
+  footer .social-icon:hover {
+    opacity: 1;
+    transform: scale(1.15) translateY(-2px);
+    background: var(--color-primary);
   }
 
   footer .social-icon svg {
-    width: 14px !important;
-    height: 14px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 
   /* Reduce animation complexity on small screens */
