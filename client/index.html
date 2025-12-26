@@ -422,6 +422,37 @@
         <div class="h-24 w-px bg-border"></div>
       </div>
 
+      <!-- CENTER: Hero Content -->
+      <main class="z-10 w-full px-4 sm:px-6 text-center">
+        <div id="hero-content" class="space-y-6 sm:space-y-8 md:space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
+          <div class="hero-heading-container relative flex items-center justify-center overflow-hidden">
+            <!-- Animated wave background video - Hidden on mobile -->
+            <video 
+              autoplay 
+              muted 
+              loop 
+              playsinline
+              class="absolute inset-0 w-full h-full object-cover opacity-20 hidden sm:block"
+              style="z-index: 0;"
+            >
+              <source src="/attached_assets/generated_videos/animated_elegant_waves_loop.mp4" type="video/mp4">
+            </video>
+            
+            <h1 class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20 reveal-text" style="padding-bottom: 4%; sm: 6%; md: 8%;">
+              <span class="reveal-line">Smart Solutions</span> <br/>
+              <span class="text-muted-foreground italic reveal-line">for Every Brand.</span>
+            </h1>
+          </div>
+          
+          <!-- Main CTA -->
+          <div class="flex justify-center px-2">
+             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-lg text-base sm:text-lg md:text-xl px-6 sm:px-10 md:px-14 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/80 active:scale-95 transition-all duration-200 group shadow-2xl shadow-primary/30 cursor-pointer uppercase tracking-wider">
+                Build My Solution
+              </button>
+          </div>
+        </div>
+      </main>
+
       <!-- BOTTOM BAR -->
       <footer class="left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex flex-col gap-4 sm:gap-6 md:gap-8 justify-center items-center">
         
@@ -460,39 +491,6 @@
           <span class="opacity-60 text-xs" id="copyright">© 2025 DatumTech</span>
         </div>
       </footer>
-
-      <!-- CENTER: Hero Content -->
-      <main class="z-10 w-full px-4 sm:px-6 text-center">
-        <div id="hero-content" class="space-y-6 sm:space-y-8 md:space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
-          <div class="hero-heading-container relative flex items-center justify-center overflow-hidden">
-            <!-- Animated wave background video - Hidden on mobile -->
-            <video 
-              autoplay 
-              muted 
-              loop 
-              playsinline
-              class="absolute inset-0 w-full h-full object-cover opacity-20 hidden sm:block"
-              style="z-index: 0;"
-            >
-              <source src="/attached_assets/generated_videos/animated_elegant_waves_loop.mp4" type="video/mp4">
-            </video>
-            
-            <h1 class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20 reveal-text" style="padding-bottom: 4%; sm: 6%; md: 8%;">
-              <span class="reveal-line">Smart Solutions</span> <br/>
-              <span class="text-muted-foreground italic reveal-line">for Every Brand.</span>
-            </h1>
-          </div>
-          
-          <!-- Main CTA -->
-          <div class="flex justify-center px-2">
-             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-lg text-base sm:text-lg md:text-xl px-6 sm:px-10 md:px-14 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/80 active:scale-95 transition-all duration-200 group shadow-2xl shadow-primary/30 cursor-pointer uppercase tracking-wider">
-                Build My Solution
-              </button>
-          </div>
-        </div>
-      </main>
-
-    </div>
 
     <!-- Vanilla JS for Animations & Dynamic Date -->
     <script>
