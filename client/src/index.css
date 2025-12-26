@@ -320,7 +320,7 @@
   }
 
   /* Button wrapper with better spacing */
-  main > div > div:last-child {
+  #hero-content > div:last-child {
     margin-top: 0.8rem !important;
   }
 
@@ -481,15 +481,6 @@
   /* Hide nav on very small screens */
   .flex-wrap {
     gap: 0.2rem !important;
-  }
-
-  /* Remove margins from all elements */
-  * {
-    margin: 0 !important;
-  }
-
-  body, main, header, footer {
-    margin: 0 !important;
   }
 }
 
