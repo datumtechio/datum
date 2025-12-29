@@ -17,14 +17,14 @@
         padding: 0;
       }
 
-      .service-container {
+      /* .service-container {
         background: linear-gradient(135deg, var(--color-background) 0%, var(--color-card) 100%);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         position: relative;
         overflow: hidden;
-      }
+      } */
 
       .service-header {
         position: relative;
@@ -274,7 +274,7 @@
     </style>
   </head>
   <body>
-    <div class="service-container">
+    <div class="bg-background text-foreground relative flex flex-col selection:bg-primary selection:text-primary-foreground sm:overflow-hidden md:overflow-hidden" id="main-container" style="min-height: 100vh; overflow-y: auto;">
       <!-- TOP BAR -->
       <header class="left-0 w-full p-3 sm:p-8 md:p-12 z-50">
         <div class="flex justify-between items-center gap-2 sm:gap-4">
