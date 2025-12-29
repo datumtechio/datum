@@ -3,295 +3,326 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
     <title>App Development | DatumTech</title>
-    <meta property="og:title" content="App Development Services | DatumTech" />
-    <meta property="og:description" content="Native and cross-platform apps that users love. iOS, Android, and progressive web apps." />
+    <meta property="og:title" content="App Development | DatumTech" />
+    <meta property="og:description" content="Apps that drive engagement. Native and cross-platform mobile solutions for iOS and Android." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@replit" />
+    <meta name="twitter:title" content="App Development | DatumTech" />
+    <meta name="twitter:description" content="Apps that drive engagement." />
+    <meta name="twitter:image" content="/og-image.png" />
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='65' font-size='60' font-weight='900' text-anchor='middle' fill='%23ffffff' font-family='monospace'%3ED%3C/text%3E%3Ccircle cx='75' cy='25' r='8' fill='%23ffffff'/%3E%3Ccircle cx='75' cy='25' r='5' fill='%23000000'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="/src/index.css" />
+    
     <style>
-      body {
-        margin: 0;
-        padding: 0;
+      @keyframes wave-shift {
+        0% { transform: translateX(0) translateY(0) scale(1.08) !important; }
+        25% { transform: translateX(1%) translateY(-0.5%) scale(1.08) !important; }
+        50% { transform: translateX(0) translateY(0) scale(1.08) !important; }
+        75% { transform: translateX(-1%) translateY(0.5%) scale(1.08) !important; }
+        100% { transform: translateX(0) translateY(0) scale(1.08) !important; }
+      }
+      
+      .animate-wave {
+        animation: wave-shift 8s ease-in-out infinite !important;
+      }
+      
+      img.animate-wave {
+        animation: wave-shift 8s ease-in-out infinite !important;
+        will-change: transform;
       }
 
-      /* .service-container {
-        background: linear-gradient(135deg, var(--color-background) 0%, var(--color-card) 100%);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+      @keyframes wave-slide-1 {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+      }
+
+      @keyframes wave-slide-2 {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(0); }
+      }
+
+      .wave-container {
+        position: absolute;
+        width: 200%;
+        height: 100%;
+        opacity: 0.08;
+      }
+
+      .wave-1 {
+        animation: wave-slide-1 15s linear infinite;
+      }
+
+      .wave-2 {
+        animation: wave-slide-2 20s linear infinite;
+      }
+
+      .wave-3 {
+        animation: wave-slide-1 25s linear infinite;
+        opacity: 0.05;
+      }
+      
+      #parallax-bg {
+        background: linear-gradient(to right, #ffffff, #f5f5f5);
+      }
+
+      .dark #parallax-bg {
+        background: linear-gradient(to right, #0a0a0a, #1a1a1a);
+      }
+
+      .giant-blob {
+        position: absolute;
+        width: 1200px;
+        height: 1200px;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+        display: none;
+      }
+
+      .datum-cursor {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9997;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Space Grotesk', monospace;
+        color: currentColor;
+        opacity: 0.5;
+        transform: translate(-50%, -50%);
+        letter-spacing: 1px;
+      }
+
+      .dark .datum-cursor {
+        opacity: 0.6;
+      }
+
+      .cursor-glow {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 2px solid currentColor;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.6;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: screen;
+        transition: width 0.3s, height 0.3s;
+      }
+
+      .cursor-glow.active {
+        width: 60px;
+        height: 60px;
+        opacity: 0.8;
+        box-shadow: 0 0 20px currentColor;
+      }
+
+      .wave-container {
+        position: absolute;
+        width: 200%;
+        height: 100%;
+        opacity: 0.08;
+        transition: transform 0.05s ease-out;
+        will-change: transform;
+      }
+
+      .cta-button {
         position: relative;
         overflow: hidden;
-      } */
-
-      .service-header {
-        position: relative;
-        z-index: 50;
-        padding: 0.25rem 0.75rem;
-        border-bottom: 1px solid var(--color-border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .service-header .logo {
-        font-size: 1.125rem;
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-        cursor: pointer;
-        transition: opacity 0.2s;
-        flex-shrink: 0;
-      }
-
-      .service-header .logo:hover {
-        opacity: 0.7;
-      }
-
-      .service-nav {
-        display: none;
-        flex: 1;
-        justify-content: center;
-        pointer-events: none;
-        padding: 0 1rem;
-      }
-
-      @media (min-width: 640px) {
-        .service-nav {
-          display: flex;
-        }
-      }
-
-      .service-nav-items {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.75rem 1.5rem;
-        text-xs sm:text-sm font-medium tracking-wide text-muted-foreground uppercase;
-      }
-
-      .service-nav-items a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s;
-      }
-
-      .service-nav-items a:hover {
-        color: var(--color-foreground);
-      }
-
-      .nav-divider {
-        color: var(--color-border);
-      }
-
-      .theme-toggle {
-        background: var(--color-border);
-        width: 3rem;
-        height: 1.75rem;
-        border-radius: 9999px;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s;
-        position: relative;
-        flex-shrink: 0;
-      }
-
-      .theme-toggle:hover {
-        background: var(--color-input);
-      }
-
-      .theme-toggle:focus-visible {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 2px;
-      }
-
-      @media (max-width: 640px) {
-        .service-nav {
-          display: none;
-        }
-      }
-
-      .service-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem 1.5rem;
-        text-align: center;
-        position: relative;
-        z-index: 10;
-      }
-
-      .service-hero {
-        max-width: 90%;
-        animation: fadeInUp 0.8s ease-out;
-      }
-
-      .service-badge {
-        display: inline-block;
-        padding: 0.5rem 1.5rem;
-        background: rgba(0, 0, 0, 0.05);
-        border: 1px solid var(--color-border);
-        border-radius: 2rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
-      }
-
-      .dark .service-badge {
-        background: rgba(255, 255, 255, 0.05);
-      }
-
-      .service-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
-        margin: 1rem 0;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-      }
-
-      @media (max-width: 640px) {
-        .service-title {
-          font-size: 1.75rem;
-        }
-      }
-
-      .service-description {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: var(--color-muted-foreground);
-        margin: 1.5rem 0 2rem 0;
-        max-width: 600px;
-      }
-
-      .service-features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1.5rem;
-        margin: 2rem 0;
-        width: 100%;
-        max-width: 600px;
-      }
-
-      .feature-item {
-        padding: 1rem;
-        border: 1px solid var(--color-border);
-        border-radius: 0.5rem;
-        background: rgba(255, 255, 255, 0.02);
-      }
-
-      .feature-icon {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .feature-name {
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .cta-section {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 2rem;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        padding: 0.75rem 1.5rem;
-        border: 2px solid var(--color-primary);
-        background: var(--color-primary);
-        color: var(--color-primary-foreground);
-        text-decoration: none;
-        border-radius: 0.375rem;
-        font-weight: 600;
-        font-size: 0.9rem;
-        letter-spacing: 0.05em;
-        cursor: pointer;
         transition: all 0.3s ease;
       }
 
-      .btn:hover {
+      .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+        pointer-events: none;
+      }
+
+      .cta-button:hover::before {
+        width: 400px;
+        height: 400px;
+      }
+
+      .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        scroll-behavior: smooth;
+      }
+
+      a {
+        position: relative;
+        text-decoration: none;
+      }
+
+      button, a, [role="button"] {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      button:focus-visible, a:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+
+      .social-icon {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .social-icon:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       }
 
-      .btn-outline {
-        background: transparent;
-        color: var(--color-primary);
+      .shimmer {
+        background: linear-gradient(90deg, currentColor, currentColor 45%, rgba(255,255,255,0.3) 50%, currentColor 55%, currentColor);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
-      .btn-outline:hover {
-        background: rgba(0, 0, 0, 0.05);
+      .shimmer.active {
+        animation: shimmer-animation 0.6s ease-in-out;
       }
 
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      @keyframes shimmer-animation {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      .interactive-text {
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .interactive-text:hover {
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .cursor-trail {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Space Grotesk', monospace;
+        color: currentColor;
+        opacity: 0.5;
+        animation: trailFade 1s ease-out forwards;
+      }
+
+      .dark .cursor-trail {
+        opacity: 0.6;
+      }
+
+      @keyframes trailFade {
+        0% { opacity: 1; transform: scale(1) translateY(0); }
+        100% { opacity: 0; transform: scale(0) translateY(10px); }
       }
 
       @media (max-width: 640px) {
-        .service-container {
-          min-height: 100vh;
-        }
+        video { display: none !important; }
+        h1.reveal-text { font-size: 1.75rem !important; }
+        header { padding: 1rem 0.75rem !important; }
+        .flex-wrap { gap: 0.25rem !important; font-size: 0.7rem !important; }
+        .cta-button { font-size: 0.95rem !important; padding: 0.75rem 1.5rem !important; height: 2.5rem !important; }
+        .flex-wrap span { display: none; }
+        .flex-wrap span:nth-child(1), .flex-wrap span:nth-child(3), .flex-wrap span:nth-child(5) { display: inline-block; font-size: 0.65rem; }
+        .service-features { gap: 1rem !important; }
+        .service-feature { flex: 1 1 100% !important; }
+      }
 
-        .service-content {
-          padding: 1.5rem 1rem;
-        }
+      .service-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
 
-        .service-title {
-          font-size: 1.5rem;
-        }
+      .service-feature {
+        flex: 1 1 calc(33.333% - 1rem);
+        min-width: 150px;
+        padding: 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
 
-        .service-description {
-          font-size: 0.9rem;
-        }
+      .dark .service-feature {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
 
-        .service-features {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-        }
+      .service-feature:hover {
+        border-color: currentColor;
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
 
-        .feature-item {
-          padding: 0.75rem;
-        }
+      .service-feature-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
       }
     </style>
   </head>
-  <body>
+  <body style="margin: 0; padding: 0;">
     <div class="bg-background text-foreground relative flex flex-col selection:bg-primary selection:text-primary-foreground sm:overflow-hidden md:overflow-hidden" id="main-container" style="min-height: 100vh; overflow-y: auto;">
-      <!-- TOP BAR -->
+      
+      <div class="cursor-glow"></div>
+      <div class="floating-particles" id="particles-container"></div>
+      
+      <div class="absolute inset-0 z-0 overflow-hidden" id="parallax-bg">
+        <div class="giant-blob"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+      </div>
+
+      <div class="datum-cursor" id="datum-cursor" style="display: none;"></div>
+
       <header class="left-0 w-full p-3 sm:p-8 md:p-12 z-50">
         <div class="flex justify-between items-center gap-2 sm:gap-4">
-          <div class="text-lg sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0">DatumTech.</div>
+          <a href="/" class="text-lg sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0">DatumTech.</a>
           
-          <!-- Services List - Hidden on Mobile, inline on desktop -->
           <div class="hidden sm:flex flex-1 justify-center pointer-events-none px-4">
             <div class="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1 text-xs sm:text-sm font-medium tracking-wide text-muted-foreground uppercase pointer-events-auto">
               <a href="/web-dev.html" class="hover:text-foreground transition-colors">Web Dev</a>
               <span class="hidden sm:inline text-border">•</span>
               <a href="/digital-marketing.html" class="hover:text-foreground transition-colors">Digital Marketing</a>
               <span class="hidden sm:inline text-border">•</span>
-              <a href="/app-dev.html" class="hover:text-foreground transition-colors">App Dev</a>
+              <a href="/app-dev.html" class="hover:text-foreground transition-colors font-semibold">App Dev</a>
             </div>
           </div>
           
-          <!-- Dark Mode Toggle -->
           <button id="dark-mode-toggle" class="relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0" title="Toggle dark mode">
             <div class="absolute top-1 left-1 w-5 sm:w-6 h-5 sm:h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
               <span id="theme-icon" class="text-xs">☀️</span>
@@ -299,42 +330,129 @@
           </button>
         </div>
         
-        <!-- Mobile Nav - Stack below header on mobile -->
         <div class="flex sm:hidden justify-center mt-3 px-2">
           <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
             <a href="/web-dev.html" class="hover:text-foreground transition-colors">Web Dev</a>
             <span class="text-border">•</span>
             <a href="/digital-marketing.html" class="hover:text-foreground transition-colors">Digital Marketing</a>
             <span class="text-border">•</span>
-            <a href="/app-dev.html" class="hover:text-foreground transition-colors">App Dev</a>
+            <a href="/app-dev.html" class="hover:text-foreground transition-colors font-semibold">App Dev</a>
           </div>
         </div>
       </header>
 
-      <!-- Service Content -->
-      <div class="service-content">
-        <div class="service-hero">
-          <div class="service-badge">App Development</div>
-          
-          <h1 class="service-title">
-            Apps That Drive Engagement
-          </h1>
-          
-          <p class="service-description">
-            From concept to deployment, we build powerful mobile and web applications. Native iOS & Android apps, progressive web apps, and cross-platform solutions engineered for performance and user delight.
-          </p>
+      <div class="absolute left-0 top-1/2 -translate-y-1/2 p-4 sm:p-8 z-50 hidden md:flex flex-col gap-8 items-center">
+        <div class="h-24 w-px bg-border"></div>
+        <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <a href="mailto:start@datumtech.io" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        <a href="https://wa.me/9613373049" target="_blank" class="social-icon hover:text-green-500 transition-colors text-muted-foreground hover:scale-110 duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" class="w-5 h-5" fill="currentColor">
+            <defs><path id="a" d="M0 0h175.216v175.552H0z"/></defs>
+            <clipPath id="b"><use href="#a" overflow="visible"/></clipPath>
+            <path clip-path="url(#b)" d="M87.608 0C39.251 0 0 39.251 0 87.608c0 15.462 4.004 30.254 11.057 43.052L0 175.552l45.897-12.104c12.798 6.758 27.588 10.761 43.052 10.761 48.357 0 87.608-39.251 87.608-87.608S135.965 0 87.608 0z" fill="currentColor"/>
+            <path d="M131.771 108.055c-2.652-1.326-15.667-7.738-18.101-8.612-2.434-.874-4.21-1.326-5.986 1.326-1.776 2.652-6.886 8.612-8.436 10.388-1.55 1.776-3.1 1.994-5.752.668-2.652-1.326-11.194-4.13-21.315-13.143-7.883-7.034-13.207-15.739-14.757-18.391-1.55-2.652-.168-4.092 1.159-5.42 1.19-1.19 2.652-3.1 3.978-4.65 1.326-1.55 1.776-2.652.888-4.428-.888-1.776-6.112-14.757-8.436-20.206-2.216-5.206-4.47-4.504-5.986-4.59l-5.097-.087c-1.776 0-4.65.668-7.084 3.32-2.434 2.652-9.304 9.08-9.304 22.062s9.52 25.59 10.846 27.366c1.326 1.776 18.688 28.572 45.33 40.062 6.332 2.738 11.27 4.37 15.132 5.594 6.354 2.016 12.134 1.73 16.704 1.048 5.096-.763 15.667-6.398 17.899-12.573 2.232-6.175 2.232-11.46.668-12.573-1.55-1.326-3.978-2.108-6.63-3.434z" fill="#FFF"/>
+          </svg>
+        </a>
+        <div class="h-24 w-px bg-border"></div>
+      </div>
 
-          <!-- Features -->
+      <main class="z-10 w-full px-4 sm:px-6 text-center">
+        <div id="hero-content" class="space-y-6 sm:space-y-8 md:space-y-12 opacity-0 scale-95 transition-all duration-1000 ease-out">
+          <div class="flex justify-center">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-xs sm:text-sm font-semibold rounded-full tracking-wide uppercase">App Development</span>
+          </div>
+
+          <div class="hero-heading-container relative flex items-center justify-center overflow-hidden">
+            <h1 class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-[0.95] tracking-tight relative z-20 reveal-text">
+              <span class="reveal-line">Apps That Drive</span> <br/>
+              <span class="text-muted-foreground italic reveal-line">Engagement</span>
+            </h1>
+          </div>
+
+          <div class="max-w-2xl mx-auto">
+            <p class="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
+              Native and cross-platform apps built with the latest technologies. From concept to App Store, we create mobile experiences that users love and businesses rely on.
+            </p>
+          </div>
+          
+          <div class="flex justify-center px-2">
+             <button class="cta-button inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-lg text-base sm:text-lg md:text-xl px-6 sm:px-10 md:px-14 h-14 sm:h-16 md:h-20 bg-primary text-primary-foreground hover:bg-primary/80 active:scale-95 transition-all duration-200 group shadow-2xl shadow-primary/30 cursor-pointer uppercase tracking-wider">
+                Get Started
+              </button>
+          </div>
+
           <div class="service-features">
-            <div class="feature-item">
-              <div class="feature-icon">📲</div>
-              <div class="feature-name">iOS & Android</div>
+            <div class="service-feature">
+              <div class="text-2xl">📱</div>
+              <div class="service-feature-title">iOS & Android</div>
             </div>
-            <div class="feature-item">
-              <div class="feature-icon">🔄</div>
-              <div class="feature-name">Cross-Platform</div>
+            <div class="service-feature">
+              <div class="text-2xl">🔄</div>
+              <div class="service-feature-title">Cross-Platform</div>
+            </div>
+            <div class="service-feature">
+              <div class="text-2xl">⚙️</div>
+              <div class="service-feature-title">Backend API</div>
+            </div>
+            <div class="service-feature">
+              <div class="text-2xl">💾</div>
+              <div class="service-feature-title">Database</div>
+            </div>
+            <div class="service-feature">
+              <div class="text-2xl">🔐</div>
+              <div class="service-feature-title">Authentication</div>
+            </div>
+            <div class="service-feature">
+              <div class="text-2xl">📊</div>
+              <div class="service-feature-title">Analytics</div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex flex-col gap-4 sm:gap-6 md:gap-8 justify-center items-center">
+        
+        <div class="flex md:hidden gap-6 justify-center items-center">
+          <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="mailto:start@datumtech.io" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+          <a href="https://wa.me/9613373049" target="_blank" class="social-icon hover:text-green-500 transition-colors text-muted-foreground hover:scale-110 duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" class="w-5 h-5" fill="currentColor">
+              <defs><path id="a" d="M0 0h175.216v175.552H0z"/></defs>
+              <clipPath id="b"><use href="#a" overflow="visible"/></clipPath>
+              <path clip-path="url(#b)" d="M87.608 0C39.251 0 0 39.251 0 87.608c0 15.462 4.004 30.254 11.057 43.052L0 175.552l45.897-12.104c12.798 6.758 27.588 10.761 43.052 10.761 48.357 0 87.608-39.251 87.608-87.608S135.965 0 87.608 0z" fill="currentColor"/>
+              <path d="M131.771 108.055c-2.652-1.326-15.667-7.738-18.101-8.612-2.434-.874-4.21-1.326-5.986 1.326-1.776 2.652-6.886 8.612-8.436 10.388-1.55 1.776-3.1 1.994-5.752.668-2.652-1.326-11.194-4.13-21.315-13.143-7.883-7.034-13.207-15.739-14.757-18.391-1.55-2.652-.168-4.092 1.159-5.42 1.19-1.19 2.652-3.1 3.978-4.65 1.326-1.55 1.776-2.652.888-4.428-.888-1.776-6.112-14.757-8.436-20.206-2.216-5.206-4.47-4.504-5.986-4.59l-5.097-.087c-1.776 0-4.65.668-7.084 3.32-2.434 2.652-9.304 9.08-9.304 22.062s9.52 25.59 10.846 27.366c1.326 1.776 18.688 28.572 45.33 40.062 6.332 2.738 11.27 4.37 15.132 5.594 6.354 2.016 12.134 1.73 16.704 1.048 5.096-.763 15.667-6.398 17.899-12.573 2.232-6.175 2.232-11.46.668-12.573-1.55-1.326-3.978-2.108-6.63-3.434z" fill="#FFF"/>
+            </svg>
+          </a>
+        </div>
+        
+        <div class="text-xs sm:text-sm text-muted-foreground font-light flex flex-col gap-1 items-center">
+          <div class="flex items-center gap-2">
+            <span class="uppercase tracking-widest font-medium text-foreground">Beirut, Lebanon</span>
+          </div>
+          <span class="opacity-60 text-xs" id="copyright">© 2025 DatumTech</span>
+        </div>
+      </footer>
+
+    <script>
       document.addEventListener('DOMContentLoaded', () => {
-        // Dark mode toggle
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
@@ -357,75 +475,176 @@
           localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
           themeIcon.textContent = isDarkNow ? '🌙' : '☀️';
         });
-      });       <div class="feature-name">Database</div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">🔐</div>
-              <div class="feature-name">Authentication</div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">📊</div>
-              <div class="feature-name">Analytics</div>
-            </div>
-          </div>
 
-          <!-- CTA -->
-          <div class="cta-section">
-            <a href="mailto:start@datumtech.io" class="btn">Begin Development</a>
-            <a href="https://wa.me/9613373049" class="btn btn-outline">Chat on WhatsApp</a>
-          </div>
-        </div>
-      </div>
+        function createParticles() {
+          const container = document.getElementById('particles-container');
+          const particleCount = window.innerWidth > 1024 ? 30 : 15;
 
-      <!-- BOTTOM BAR -->
-      <footer class="left-0 w-full p-4 sm:p-8 md:p-12 z-50 flex flex-col gap-4 sm:gap-6 md:gap-8 justify-center items-center">
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 3 + 1;
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const duration = Math.random() * 20 + 15;
+            const delay = Math.random() * 5;
+
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = startX + '%';
+            particle.style.top = startY + '%';
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = delay + 's';
+
+            container.appendChild(particle);
+          }
+        }
+
+        createParticles();
+
+        const yearSpan = document.getElementById('copyright');
+        if(yearSpan) {
+            yearSpan.textContent = `© ${new Date().getFullYear()} DatumTech`;
+        }
+
+        const isTouchDevice = () => {
+          return (('ontouchstart' in window) ||
+                  (navigator.maxTouchPoints > 0) ||
+                  (navigator.msMaxTouchPoints > 0));
+        };
+
+        const cursorGlow = document.querySelector('.cursor-glow');
+        const datumCursor = document.getElementById('datum-cursor');
+        const waveContainers = document.querySelectorAll('.wave-container');
+        const body = document.body;
         
-        <!-- Mobile Social Icons - Show only on mobile -->
-        <div class="flex md:hidden gap-6 justify-center items-center">
-          <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
-            <!-- Linkedin Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="#" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
-            <!-- X Icon -->
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-          </a>
-          <a href="mailto:start@datumtech.io" class="social-icon hover:text-primary transition-colors text-muted-foreground hover:scale-110 duration-200">
-            <!-- Mail Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </a>
-          <a href="https://wa.me/9613373049" target="_blank" class="social-icon hover:text-green-500 transition-colors text-muted-foreground hover:scale-110 duration-200">
-            <!-- WhatsApp Logo -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" class="w-5 h-5" fill="currentColor">
-              <defs><path id="a" d="M0 0h175.216v175.552H0z"/></defs>
-              <clipPath id="b"><use href="#a" overflow="visible"/></clipPath>
-              <path clip-path="url(#b)" d="M87.608 0C39.251 0 0 39.251 0 87.608c0 15.462 4.004 30.254 11.057 43.052L0 175.552l45.897-12.104c12.798 6.758 27.588 10.761 43.052 10.761 48.357 0 87.608-39.251 87.608-87.608S135.965 0 87.608 0z" fill="currentColor"/>
-              <path d="M131.771 108.055c-2.652-1.326-15.667-7.738-18.101-8.612-2.434-.874-4.21-1.326-5.986 1.326-1.776 2.652-6.886 8.612-8.436 10.388-1.55 1.776-3.1 1.994-5.752.668-2.652-1.326-11.194-4.13-21.315-13.143-7.883-7.034-13.207-15.739-14.757-18.391-1.55-2.652-.168-4.092 1.159-5.42 1.19-1.19 2.652-3.1 3.978-4.65 1.326-1.55 1.776-2.652.888-4.428-.888-1.776-6.112-14.757-8.436-20.206-2.216-5.206-4.47-4.504-5.986-4.59l-5.097-.087c-1.776 0-4.65.668-7.084 3.32-2.434 2.652-9.304 9.08-9.304 22.062s9.52 25.59 10.846 27.366c1.326 1.776 18.688 28.572 45.33 40.062 6.332 2.738 11.27 4.37 15.132 5.594 6.354 2.016 12.134 1.73 16.704 1.048 5.096-.763 15.667-6.398 17.899-12.573 2.232-6.175 2.232-11.46.668-12.573-1.55-1.326-3.978-2.108-6.63-3.434z" fill="#FFF"/>
-            </svg>
-          </a>
-        </div>
+        let mouseX = 0;
+        let mouseY = 0;
+        let isOverButton = false;
+        const isTouch = isTouchDevice();
+
+        if (isTouch && cursorGlow) {
+          cursorGlow.style.display = 'none';
+        }
+
+        if (isTouch && datumCursor) {
+          datumCursor.style.display = 'none';
+        }
         
-        <!-- Address (Centered with top padding) -->
-        <div class="text-xs sm:text-sm text-muted-foreground font-light flex flex-col gap-1 items-center">
-          <div class="flex items-center gap-2">
-            <span class="uppercase tracking-widest font-medium text-foreground">Beirut, Lebanon</span>
-          </div>
-          <span class="opacity-60 text-xs" id="copyright">© 2025 DatumTech</span>
-        </div>
-      </footer>
-    </div>
+        if (!isTouch) {
+          let targetX = 0;
+          let targetY = 0;
+          let currentX = 0;
+          let currentY = 0;
+          let lastTrailX = 0;
+          let lastTrailY = 0;
 
-    <script>
-      // Dark mode toggle
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+          document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
 
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-      }
+            const distance = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
+            if (distance > 15) {
+              const trail = document.createElement('div');
+              trail.className = 'cursor-trail';
+              trail.style.left = (mouseX - 7) + 'px';
+              trail.style.top = (mouseY - 7) + 'px';
+              trail.textContent = Math.random() > 0.5 ? '1' : '0';
+              document.body.appendChild(trail);
+
+              setTimeout(() => trail.remove(), 1000);
+              
+              lastTrailX = mouseX;
+              lastTrailY = mouseY;
+            }
+
+            if (cursorGlow) {
+              cursorGlow.style.left = mouseX + 'px';
+              cursorGlow.style.top = mouseY + 'px';
+            }
+
+            if (datumCursor) {
+              datumCursor.style.left = mouseX + 'px';
+              datumCursor.style.top = mouseY + 'px';
+              datumCursor.textContent = '</>';
+            }
+
+            targetX = (mouseX - window.innerWidth / 2) * 0.2;
+            targetY = (mouseY - window.innerHeight / 2) * 0.2;
+
+            function smoothParallax() {
+              currentX += (targetX - currentX) * 0.1;
+              currentY += (targetY - currentY) * 0.1;
+
+              const parallaxBg = document.getElementById('parallax-bg');
+              if (parallaxBg) {
+                parallaxBg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+              }
+
+              if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
+                requestAnimationFrame(smoothParallax);
+              }
+            }
+
+            smoothParallax();
+          });
+
+          document.addEventListener('mousedown', () => {
+            if (cursorGlow) {
+              cursorGlow.classList.add('active');
+            }
+          });
+
+          document.addEventListener('mouseup', () => {
+            if (cursorGlow) {
+              cursorGlow.classList.remove('active');
+            }
+          });
+        } else {
+          const parallaxBg = document.getElementById('parallax-bg');
+          if (parallaxBg) {
+            parallaxBg.style.transform = 'translate(0, 0)';
+          }
+        }
+
+        const ctaButton = document.querySelector('.cta-button');
+        if (ctaButton) {
+          ctaButton.addEventListener('mouseenter', () => {
+            isOverButton = true;
+            if (cursorGlow && !isTouch) {
+              cursorGlow.classList.add('active');
+            }
+          });
+
+          ctaButton.addEventListener('mouseleave', () => {
+            isOverButton = false;
+            if (cursorGlow && !isTouch) {
+              cursorGlow.classList.remove('active');
+            }
+          });
+
+          ctaButton.addEventListener('touchstart', () => {
+            ctaButton.style.transform = 'scale(0.98)';
+          });
+
+          ctaButton.addEventListener('touchend', () => {
+            ctaButton.style.transform = '';
+          });
+        }
+
+        setTimeout(() => {
+          const hero = document.getElementById('hero-content');
+          if(hero) {
+            hero.classList.remove('opacity-0', 'scale-95');
+            hero.classList.add('opacity-100', 'scale-100');
+          }
+        }, 100);
+
+        if (isTouch) {
+          document.documentElement.style.setProperty('--animation-duration', '20s');
+        }
+      });
     </script>
   </body>
 </html>
