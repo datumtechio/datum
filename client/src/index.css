@@ -466,3 +466,52 @@ a:hover {
 .shadow-xl {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
+/* Navigation Styling */
+.nav-text {
+  color: #000000;
+}
+
+.dark .nav-text {
+  color: #ffffff;
+}
+
+/* Hamburger Menu Styling */
+.hamburger-line {
+  background-color: #000000;
+  display: block;
+}
+
+.dark .hamburger-line {
+  background-color: #ffffff;
+}
+
+#mobile-menu-toggle:hover .hamburger-line {
+  opacity: 0.7;
+}
+
+#mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+#mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+#mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+#mobile-nav {
+  animation: slideDown 300ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

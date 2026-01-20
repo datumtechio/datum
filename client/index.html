@@ -353,31 +353,40 @@
           
           <!-- Services List - Hidden on Mobile, inline on desktop -->
           <div class="hidden sm:flex flex-1 justify-center pointer-events-none px-4">
-            <div class="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1 text-xs sm:text-sm font-medium tracking-wide text-muted-foreground uppercase pointer-events-auto">
-              <a href="/web-dev.html" class="hover:text-foreground transition-colors">Web Development</a>
+            <div class="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1 text-xs sm:text-sm font-bold tracking-wide nav-text uppercase pointer-events-auto">
+              <a href="/web-dev.html" class="hover:opacity-70 transition-opacity">Web Development</a>
               <span class="hidden sm:inline text-border">•</span>
-              <a href="/digital-marketing.html" class="hover:text-foreground transition-colors">Digital Marketing</a>
+              <a href="/digital-marketing.html" class="hover:opacity-70 transition-opacity">Digital Marketing</a>
               <span class="hidden sm:inline text-border">•</span>
-              <a href="/app-dev.html" class="hover:text-foreground transition-colors">App Development</a>
+              <a href="/app-dev.html" class="hover:opacity-70 transition-opacity">App Development</a>
             </div>
           </div>
           
-          <!-- Dark Mode Toggle -->
-          <button id="dark-mode-toggle" class="relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0" title="Toggle dark mode">
-            <div class="absolute top-1 left-1 w-5 sm:w-6 h-5 sm:h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
-              <span id="theme-icon" class="text-xs">☀️</span>
-            </div>
-          </button>
+          <div class="flex items-center gap-3 sm:gap-4">
+            <!-- Hamburger Menu - Mobile Only -->
+            <button id="mobile-menu-toggle" class="sm:hidden flex flex-col gap-1.5 w-6 h-6 focus:outline-none">
+              <span class="hamburger-line h-0.5 w-full transition-all duration-300"></span>
+              <span class="hamburger-line h-0.5 w-full transition-all duration-300"></span>
+              <span class="hamburger-line h-0.5 w-full transition-all duration-300"></span>
+            </button>
+            
+            <!-- Dark Mode Toggle -->
+            <button id="dark-mode-toggle" class="relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0" title="Toggle dark mode">
+              <div class="absolute top-1 left-1 w-5 sm:w-6 h-5 sm:h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
+                <span id="theme-icon" class="text-xs">☀️</span>
+              </div>
+            </button>
+          </div>
         </div>
         
-        <!-- Mobile Nav - Stack below header on mobile -->
-        <div class="flex sm:hidden justify-center mt-3 px-2">
-          <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-            <a href="/web-dev.html" class="hover:text-foreground transition-colors">Web Development</a>
+        <!-- Mobile Nav - Hidden by default, shown on hamburger click -->
+        <div id="mobile-nav" class="hidden sm:hidden justify-center mt-3 px-2 transition-all duration-300">
+          <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-xs font-bold tracking-wide nav-text uppercase">
+            <a href="/web-dev.html" class="hover:opacity-70 transition-opacity">Web Development</a>
             <span class="text-border">•</span>
-            <a href="/digital-marketing.html" class="hover:text-foreground transition-colors">Digital Marketing</a>
+            <a href="/digital-marketing.html" class="hover:opacity-70 transition-opacity">Digital Marketing</a>
             <span class="text-border">•</span>
-            <a href="/app-dev.html" class="hover:text-foreground transition-colors">App Development</a>
+            <a href="/app-dev.html" class="hover:opacity-70 transition-opacity">App Development</a>
           </div>
         </div>
       </header>
@@ -689,6 +698,34 @@
 
           ctaButton.addEventListener('touchend', () => {
             ctaButton.style.transform = '';
+          });
+        }
+
+        // ===== HAMBURGER MENU =====
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        let menuOpen = false;
+
+        if (mobileMenuToggle && mobileNav) {
+          mobileMenuToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenuToggle.classList.toggle('active');
+            
+            if (menuOpen) {
+              mobileNav.classList.remove('hidden');
+            } else {
+              mobileNav.classList.add('hidden');
+            }
+          });
+
+          // Close menu when a link is clicked
+          const navLinks = mobileNav.querySelectorAll('a');
+          navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+              menuOpen = false;
+              mobileMenuToggle.classList.remove('active');
+              mobileNav.classList.add('hidden');
+            });
           });
         }
 
