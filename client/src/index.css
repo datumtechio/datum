@@ -501,6 +501,23 @@ a:hover {
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
+/* Enforce visibility by breakpoint */
+@media (min-width: 1024px) {
+  #mobile-menu-toggle {
+    display: none !important;
+  }
+
+  #mobile-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #dark-mode-toggle {
+    display: none !important;
+  }
+}
+
 #mobile-nav {
   animation: slideDown 300ms ease-out;
 }
