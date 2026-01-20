@@ -349,7 +349,7 @@
       <!-- TOP BAR -->
       <header class="left-0 w-full p-3 sm:p-8 md:p-12 z-50">
         <div class="flex justify-between items-center gap-2 sm:gap-4">
-          <div class="text-lg sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0">DatumTech.</div>
+          <a href="/" id="logo" class="text-lg sm:text-2xl font-serif font-bold tracking-tight interactive-text cursor-pointer hover:opacity-70 transition-opacity flex-shrink-0">DatumTech.</a>
           
           <!-- Services List - Hidden on Mobile, inline on desktop -->
           <div class="hidden sm:flex flex-1 justify-center pointer-events-none px-4">
@@ -556,7 +556,6 @@
         if (darkModeToggleMobile) {
           darkModeToggleMobile.addEventListener('click', toggleDarkMode);
         }
-        });
 
         // ===== FLOATING PARTICLES =====
         function createParticles() {
