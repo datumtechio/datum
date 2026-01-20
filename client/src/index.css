@@ -434,6 +434,13 @@ button, a {
 
 body {
   scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+
+/* Unify fonts across all elements */
+.font-serif,
+.font-mono {
+  font-family: var(--font-sans) !important;
 }
 
 /* Enhanced link styling */
@@ -516,6 +523,17 @@ a:hover {
   #dark-mode-toggle {
     display: none !important;
   }
+}
+
+/* Square toggle styling */
+#dark-mode-toggle,
+#dark-mode-toggle-mobile {
+  border-radius: 8px !important;
+}
+
+#dark-mode-toggle > div,
+#dark-mode-toggle-mobile > div {
+  border-radius: 6px !important;
 }
 
 #mobile-nav {
