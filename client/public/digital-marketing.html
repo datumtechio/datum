@@ -348,7 +348,7 @@
               <span class="hamburger-line h-0.5 w-full transition-all duration-300"></span>
             </button>
             
-            <button id="dark-mode-toggle" class="relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0" title="Toggle dark mode">
+            <button id="dark-mode-toggle" class="hidden sm:block relative w-12 sm:w-14 h-7 sm:h-8 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0" title="Toggle dark mode">
               <div class="absolute top-1 left-1 w-5 sm:w-6 h-5 sm:h-6 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
                 <span id="theme-icon" class="text-xs">☀️</span>
               </div>
@@ -356,13 +356,25 @@
           </div>
         </div>
         
-        <div id="mobile-nav" class="hidden sm:hidden justify-center mt-3 px-2 transition-all duration-300">
-          <div class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-xs font-bold tracking-wide nav-text uppercase">
-            <a href="/web-dev.html" class="hover:opacity-70 transition-opacity">Web Development</a>
-            <span class="text-border">•</span>
-            <a href="/digital-marketing.html" class="hover:opacity-70 transition-opacity font-semibold">Digital Marketing</a>
-            <span class="text-border">•</span>
-            <a href="/app-dev.html" class="hover:opacity-70 transition-opacity">App Development</a>
+        <!-- Mobile Nav - Hidden by default, shown on hamburger click, stacked vertically -->
+        <div id="mobile-nav" class="hidden sm:hidden flex flex-col gap-4 mt-4 px-2 transition-all duration-300">
+          <!-- Navigation Links - Stacked -->
+          <div class="flex flex-col gap-3">
+            <a href="/web-dev.html" class="text-sm font-bold tracking-wide nav-text uppercase hover:opacity-70 transition-opacity">Web Development</a>
+            <a href="/digital-marketing.html" class="text-sm font-bold tracking-wide nav-text uppercase hover:opacity-70 transition-opacity font-semibold">Digital Marketing</a>
+            <a href="/app-dev.html" class="text-sm font-bold tracking-wide nav-text uppercase hover:opacity-70 transition-opacity">App Development</a>
+          </div>
+          
+          <!-- Divider -->
+          <div class="h-px bg-border"></div>
+          
+          <!-- Dark Mode Toggle - Mobile Only -->
+          <div class="flex items-center justify-center">
+            <button id="dark-mode-toggle-mobile" class="relative w-12 h-7 bg-border rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary" title="Toggle dark mode">
+              <div class="absolute top-1 left-1 w-5 h-5 bg-foreground rounded-full transition-transform duration-300 flex items-center justify-center">
+                <span id="theme-icon-mobile" class="text-xs">☀️</span>
+              </div>
+            </button>
           </div>
         </div>
       </header>
@@ -445,27 +457,44 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const darkModeToggleMobile = document.getElementById('dark-mode-toggle-mobile');
         const themeIcon = document.getElementById('theme-icon');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
         const htmlElement = document.documentElement;
 
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
 
-        if (isDark) {
-          htmlElement.classList.add('dark');
-          themeIcon.textContent = '🌙';
-        } else {
-          htmlElement.classList.remove('dark');
-          themeIcon.textContent = '☀️';
-        }
+        const updateTheme = () => {
+          if (isDark) {
+            htmlElement.classList.add('dark');
+            if (themeIcon) themeIcon.textContent = '🌙';
+            if (themeIconMobile) themeIconMobile.textContent = '🌙';
+          } else {
+            htmlElement.classList.remove('dark');
+            if (themeIcon) themeIcon.textContent = '☀️';
+            if (themeIconMobile) themeIconMobile.textContent = '☀️';
+          }
+        };
 
-        darkModeToggle.addEventListener('click', () => {
+        updateTheme();
+
+        const toggleDarkMode = () => {
           htmlElement.classList.toggle('dark');
           const isDarkNow = htmlElement.classList.contains('dark');
           localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
-          themeIcon.textContent = isDarkNow ? '🌙' : '☀️';
-        });
+          if (themeIcon) themeIcon.textContent = isDarkNow ? '🌙' : '☀️';
+          if (themeIconMobile) themeIconMobile.textContent = isDarkNow ? '🌙' : '☀️';
+        };
+
+        if (darkModeToggle) {
+          darkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+
+        if (darkModeToggleMobile) {
+          darkModeToggleMobile.addEventListener('click', toggleDarkMode);
+        }
 
         function createParticles() {
           const container = document.getElementById('particles-container');
