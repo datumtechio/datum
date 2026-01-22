@@ -225,26 +225,35 @@
 }
 
 /* DARK MODE TOGGLE STYLES */
-#dark-mode-toggle {
+#dark-mode-toggle,
+#dark-mode-toggle-mobile {
   position: relative;
   cursor: pointer;
   background: var(--color-border);
 }
 
-#dark-mode-toggle:hover {
+#dark-mode-toggle:hover,
+#dark-mode-toggle-mobile:hover {
   background: var(--color-input);
 }
 
-.dark #dark-mode-toggle {
+.dark #dark-mode-toggle,
+.dark #dark-mode-toggle-mobile {
   background: var(--color-border);
 }
 
-#dark-mode-toggle > div {
+#dark-mode-toggle > div,
+#dark-mode-toggle-mobile > div {
   background: var(--color-foreground);
 }
 
 .dark #dark-mode-toggle > div {
   transform: translateX(1.75rem);
+  background: var(--color-foreground);
+}
+
+.dark #dark-mode-toggle-mobile > div {
+  transform: translateX(1.25rem);
   background: var(--color-foreground);
 }
 
